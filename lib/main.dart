@@ -5,7 +5,6 @@ import '/providers.dart';
 import '/screens/home.dart';
 
 // TODO: Windows Icon
-// TODO: Mac Icon
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
