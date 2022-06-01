@@ -175,6 +175,7 @@ class _HomeState extends ConsumerState<Home> {
               height: Styles.base * 31,
               width: Styles.base * 31,
               padding: Styles.normal,
+              margin: Styles.normal,
               child: ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(Styles.base * 5)),
                 child: SvgPicture.asset('assets/images/icon.svg'),
@@ -211,7 +212,7 @@ class _HomeState extends ConsumerState<Home> {
               children: <Widget>[
                 controllers,
                 const ArnaDivider(),
-                input,
+                Expanded(child: input),
                 Expanded(child: SafeArea(top: false, child: output)),
               ],
             ),
