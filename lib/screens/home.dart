@@ -133,14 +133,14 @@ class _HomeState extends ConsumerState<Home> {
                 ? const Center(child: ArnaProgressIndicator())
                 : Padding(
                     padding: Styles.normal,
-                    child: Text(
-                      outputText.isEmpty ? Strings.empty : outputText,
-                      style: outputText.isEmpty
-                          ? ArnaTheme.of(context).textTheme.body!.copyWith(
-                                color: ArnaDynamicColor.resolve(ArnaColors.secondaryTextColor, context),
-                              )
-                          : ArnaTheme.of(context).textTheme.body,
-                    ),
+                    child: outputText.isEmpty
+                        ? Text(
+                            Strings.empty,
+                            style: ArnaTheme.of(context).textTheme.body!.copyWith(
+                                  color: ArnaDynamicColor.resolve(ArnaColors.secondaryTextColor, context),
+                                ),
+                          )
+                        : Text(outputText, style: ArnaTheme.of(context).textTheme.body),
                   ),
           ),
           const ArnaDivider(),
