@@ -112,17 +112,15 @@ class _HomeState extends ConsumerState<Home> {
       ),
     );
 
-    final Widget input = Expanded(
-      child: Padding(
-        padding: Styles.small,
-        child: ArnaTextField(
-          controller: controller,
-          onSubmitted: (String text) => translate(context, sourceKey, targetKey, controller.text, ref),
-          hintText: Strings.text,
-          maxLength: 5000,
-          maxLines: null,
-          textAlignVertical: TextAlignVertical.top,
-        ),
+    final Widget input = Padding(
+      padding: Styles.small,
+      child: ArnaTextField(
+        controller: controller,
+        onSubmitted: (String text) => translate(context, sourceKey, targetKey, controller.text, ref),
+        hintText: Strings.text,
+        maxLength: 5000,
+        maxLines: null,
+        textAlignVertical: TextAlignVertical.top,
       ),
     );
 
