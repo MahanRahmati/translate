@@ -1,6 +1,10 @@
 # Arna Translate
 
 <p align="center">
+  <img src="https://user-images.githubusercontent.com/16052180/171461601-8b58706b-12d4-4131-97ad-1580fd5ba580.png" width="128" >
+</p>
+
+<p align="center">
   <a href="https://github.com/MahanRahmati/"><img src="https://img.shields.io/badge/Maintainer-MahanRahmati-informational"></a>
   <img src="https://img.shields.io/github/license/MahanRahmati/translate">
 </p>
