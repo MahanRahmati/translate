@@ -117,6 +117,7 @@ class _HomeState extends ConsumerState<Home> {
       child: ArnaTextField(
         controller: controller,
         onSubmitted: (String text) => translate(context, sourceKey, targetKey, controller.text, ref),
+        clearButtonMode: ArnaOverlayVisibilityMode.editing,
         hintText: Strings.text,
         maxLength: 5000,
         maxLines: null,
