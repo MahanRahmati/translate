@@ -1,6 +1,5 @@
 import 'package:arna/arna.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '/providers.dart';
 import '/screens/languages.dart';
@@ -172,15 +171,10 @@ class _HomeState extends ConsumerState<Home> {
           icon: Icons.info_outlined,
           onPressed: () => showArnaAboutDialog(
             context: context,
-            applicationIcon: Container(
-              height: Styles.base * 31,
-              width: Styles.base * 31,
-              padding: Styles.normal,
-              margin: Styles.normal,
-              child: ClipRRect(
-                borderRadius: const BorderRadius.all(Radius.circular(Styles.base * 5)),
-                child: SvgPicture.asset('assets/images/icon.svg'),
-              ),
+            applicationIcon: Image.asset(
+              'assets/images/AppIcon.png',
+              height: Styles.base * 30,
+              width: Styles.base * 30,
             ),
             applicationName: Strings.appName,
             developerName: 'Mahan Rahmati',
