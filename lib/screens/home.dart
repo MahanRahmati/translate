@@ -195,22 +195,23 @@ class _HomeState extends ConsumerState<Home> {
           tooltipMessage: Strings.settings,
         ),
       ],
-      body: isExpanded(context)
-          ? Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                SizedBox(width: deviceWidth(context) / 2, child: input),
-                SizedBox(width: deviceWidth(context) / 2, child: output),
-              ],
-            )
-          : Column(
-              children: <Widget>[
-                controllers,
-                const ArnaDivider(),
-                Expanded(child: input),
-                Expanded(child: SafeArea(top: false, child: output)),
-              ],
-            ),
+      body: ArnaBody(
+        expanded: Row(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            SizedBox(width: deviceWidth(context) / 2, child: input),
+            SizedBox(width: deviceWidth(context) / 2, child: output),
+          ],
+        ),
+        compact: Column(
+          children: <Widget>[
+            controllers,
+            const ArnaDivider(),
+            Expanded(child: input),
+            Expanded(child: SafeArea(top: false, child: output)),
+          ],
+        ),
+      ),
     );
   }
 }
