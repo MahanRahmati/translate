@@ -140,7 +140,7 @@ class _HomeState extends ConsumerState<Home> {
                                   color: ArnaDynamicColor.resolve(ArnaColors.secondaryTextColor, context),
                                 ),
                           )
-                        : Text(outputText, style: ArnaTheme.of(context).textTheme.body),
+                        : ArnaSelectableText(outputText, style: ArnaTheme.of(context).textTheme.body),
                   ),
           ),
           const ArnaDivider(),

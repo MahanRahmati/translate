@@ -6,7 +6,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "53bbb836ca48452b0771befd728159d755c66a44"
+      resolved-ref: "3099d01a601edb6d8341c0591c8976904d6afadd"
       url: "https://github.com/MahanRahmati/Arna.git"
     source: git
     version: "1.0.2"
