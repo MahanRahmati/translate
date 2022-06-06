@@ -6,10 +6,10 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "3099d01a601edb6d8341c0591c8976904d6afadd"
+      resolved-ref: "2eeec8c712d7790762dbf195c00bf3c5044c735f"
       url: "https://github.com/MahanRahmati/Arna.git"
     source: git
-    version: "1.0.2"
+    version: "1.0.4"
   async:
     dependency: transitive
     description:
