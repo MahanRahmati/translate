@@ -1,5 +1,7 @@
 name: Platform Releases
-on: [push, pull_request, workflow_dispatch]
+on:
+  release:
+    types: [published]
 
 jobs:
   # Android
@@ -69,74 +71,74 @@ jobs:
           name: Translate-windows
           path: Translate-windows.zip
 
-  # Linux
-  linux:
-    runs-on: ubuntu-latest
-    steps:
-      # Get dependencies.
-      - run: sudo apt-get update -y
-      - run: sudo apt-get install -y ninja-build libgtk-3-dev libblkid-dev
+  # # Linux
+  # linux:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     # Get dependencies.
+  #     - run: sudo apt-get update -y
+  #     - run: sudo apt-get install -y ninja-build libgtk-3-dev libblkid-dev
 
-      # Setup the flutter environment.
-      - uses: subosito/flutter-action@v2.4.0
-        with:
-          channel: "stable" # 'dev', 'alpha', default to: 'stable'
-          # flutter-version: '1.12.x' # you can also specify exact version of flutter
+  #     # Setup the flutter environment.
+  #     - uses: subosito/flutter-action@v2.4.0
+  #       with:
+  #         channel: "stable" # 'dev', 'alpha', default to: 'stable'
+  #         # flutter-version: '1.12.x' # you can also specify exact version of flutter
 
-      # Get flutter dependencies.
-      - run: flutter pub get
+  #     # Get flutter dependencies.
+  #     - run: flutter pub get
 
-      # Check for any formatting issues in the code.
-      - run: flutter format --set-exit-if-changed . -l 120
+  #     # Check for any formatting issues in the code.
+  #     - run: flutter format --set-exit-if-changed . -l 120
 
-      # Statically analyze the Dart code for any errors.
-      - run: flutter analyze .
+  #     # Statically analyze the Dart code for any errors.
+  #     - run: flutter analyze .
 
-      - run: flutter build linux
+  #     - run: flutter build linux
 
-      - uses: papeloto/action-zip@v1
-        with:
-          files: build/linux/x64/release/bundle
-          dest: Translate-linux.zip
+  #     - uses: papeloto/action-zip@v1
+  #       with:
+  #         files: build/linux/x64/release/bundle
+  #         dest: Translate-linux.zip
 
-      - uses: actions/upload-artifact@v3.1.0
-        with:
-          name: Translate-linux
-          path: Translate-linux.zip
+  #     - uses: actions/upload-artifact@v3.1.0
+  #       with:
+  #         name: Translate-linux
+  #         path: Translate-linux.zip
 
-  # Mac
-  mac:
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v3.0.2
-      - uses: maxim-lobanov/setup-xcode@v1
-        with:
-          xcode-version: latest-stable
+  # # Mac
+  # mac:
+  #   runs-on: macos-latest
+  #   steps:
+  #     - uses: actions/checkout@v3.0.2
+  #     - uses: maxim-lobanov/setup-xcode@v1
+  #       with:
+  #         xcode-version: latest-stable
 
-      # Setup the flutter environment.
-      - uses: subosito/flutter-action@v2.4.0
-        with:
-          channel: "stable" # 'dev', 'alpha', default to: 'stable'
-          # flutter-version: '1.12.x' # you can also specify exact version of flutter
+  #     # Setup the flutter environment.
+  #     - uses: subosito/flutter-action@v2.4.0
+  #       with:
+  #         channel: "stable" # 'dev', 'alpha', default to: 'stable'
+  #         # flutter-version: '1.12.x' # you can also specify exact version of flutter
 
-      # Get flutter dependencies.
-      - run: flutter pub get
+  #     # Get flutter dependencies.
+  #     - run: flutter pub get
 
-      # Check for any formatting issues in the code.
-      - run: flutter format --set-exit-if-changed . -l 120
+  #     # Check for any formatting issues in the code.
+  #     - run: flutter format --set-exit-if-changed . -l 120
 
-      # Statically analyze the Dart code for any errors.
-      - run: flutter analyze .
+  #     # Statically analyze the Dart code for any errors.
+  #     - run: flutter analyze .
 
-      # Build app.
-      - run: flutter build macos --release
+  #     # Build app.
+  #     - run: flutter build macos --release
 
-      - uses: papeloto/action-zip@v1
-        with:
-          files: build/macos/Release/Product
-          dest: Translate-mac.zip
+  #     - uses: papeloto/action-zip@v1
+  #       with:
+  #         files: build/macos/Release/Product
+  #         dest: Translate-mac.zip
 
-      - uses: actions/upload-artifact@v3.1.0
-        with:
-          name: Translate-mac
-          path: Translate-mac.zip
+  #     - uses: actions/upload-artifact@v3.1.0
+  #       with:
+  #         name: Translate-mac
+  #         path: Translate-mac.zip
