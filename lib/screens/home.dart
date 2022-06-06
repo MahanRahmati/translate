@@ -82,6 +82,7 @@ class _HomeState extends ConsumerState<Home> {
                 builder: (BuildContext context) => const Languages(source: true),
                 useBlur: showBlur,
               ),
+              buttonSize: ButtonSize.huge,
             ),
           ),
           ArnaIconButton(
@@ -105,6 +106,7 @@ class _HomeState extends ConsumerState<Home> {
                 builder: (BuildContext context) => const Languages(source: false),
                 useBlur: showBlur,
               ),
+              buttonSize: ButtonSize.huge,
             ),
           ),
         ],
