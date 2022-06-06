@@ -1,11 +1,9 @@
 name: translate
 description: Alternative front-end for Google Translate, serving as a Free and Open Source translator with over a hundred languages available.
 
-# The following line prevents the package from being accidentally published to
-# pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.1
+version: 1.0.4
 
 environment:
   sdk: ">=2.17.1 <3.0.0"
@@ -24,11 +22,7 @@ dev_dependencies:
 
   flutter_lints: ^2.0.1
 
-# The following section is specific to Flutter packages.
 flutter:
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
   uses-material-design: true
 
   assets:
