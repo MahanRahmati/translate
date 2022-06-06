@@ -10,7 +10,7 @@ on:
         type: string
 
 # Declare default permissions as read only.
-permissions: read-all
+# permissions: read-all
 
 jobs:
   draft-release:
