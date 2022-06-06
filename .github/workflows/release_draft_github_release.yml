@@ -135,4 +135,3 @@ jobs:
           asset_path: ./arna_translate_${{ matrix.target }}${{ matrix.asset_extension }}
           asset_name: arna_translate_${{ matrix.target }}${{ matrix.asset_extension }}
           asset_content_type: ${{ matrix.asset_content_type }}
-          overwrite: true
