@@ -9,6 +9,9 @@
   <img src="https://img.shields.io/github/license/MahanRahmati/translate">
 </p>
 
+| ![1](.github/1.png) | ![2](.github/2.png) |
+| :-----------------: | :-----------------: |
+
 ## Introduction
 
 Alternative front-end for Google Translate, serving as a Free and Open Source translator with over a hundred languages available.
