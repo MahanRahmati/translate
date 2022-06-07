@@ -1,4 +1,4 @@
-package com.arna.translate.translate
+package com.arna.translate
 
 import io.flutter.embedding.android.FlutterActivity
 
