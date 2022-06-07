@@ -21,6 +21,11 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+int generateVersionCode(String versionName) {
+   def parts = versionName.split("\\.").collect { it.toInteger() }
+   return parts[0] * 10000 + parts[1] * 100 + parts[2]
+}
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
@@ -49,7 +54,7 @@ android {
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-build-configuration.
         minSdkVersion flutter.minSdkVersion
         targetSdkVersion flutter.targetSdkVersion
-        versionCode flutterVersionCode.toInteger()
+        versionCode generateVersionCode(flutterVersionName)
         versionName flutterVersionName
     }
 
