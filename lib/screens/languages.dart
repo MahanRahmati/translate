@@ -1,11 +1,12 @@
 import 'package:arna/arna.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '/providers.dart';
 import '/strings.dart';
 import '/utils/languages.dart';
 
-class Languages extends ConsumerWidget {
+class Languages extends ConsumerStatefulWidget {
   const Languages({
     super.key,
     required this.source,
@@ -14,8 +15,23 @@ class Languages extends ConsumerWidget {
   final bool source;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final String groupValue = source ? ref.watch(sourceProvider) : ref.watch(targetProvider);
+  ConsumerState<ConsumerStatefulWidget> createState() => _LanguagesState();
+}
+
+class _LanguagesState extends ConsumerState<Languages> {
+  late SharedPreferences preferences;
+
+  @override
+  void initState() {
+    super.initState();
+    init();
+  }
+
+  Future<void> init() async => preferences = await SharedPreferences.getInstance();
+
+  @override
+  Widget build(BuildContext context) {
+    final String groupValue = widget.source ? ref.watch(sourceProvider) : ref.watch(targetProvider);
     final List<ArnaRadioListTile<String>> list = <ArnaRadioListTile<String>>[];
 
     languages.forEach((String key, String value) {
@@ -24,10 +40,14 @@ class Languages extends ConsumerWidget {
           value: key,
           groupValue: groupValue,
           title: languages[key]!,
-          onChanged: (String? value) {
-            source
-                ? ref.read(sourceProvider.notifier).state = value!
-                : ref.read(targetProvider.notifier).state = value!;
+          onChanged: (String? value) async {
+            if (widget.source) {
+              preferences.setString('source', value!);
+              ref.read(sourceProvider.notifier).state = value;
+            } else {
+              preferences.setString('target', value!);
+              ref.read(targetProvider.notifier).state = value;
+            }
           },
         ),
       );
