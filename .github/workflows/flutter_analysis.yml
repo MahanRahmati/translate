@@ -1,0 +1,23 @@
+name: Flutter Analysis
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3.0.2
+
+      # Setup the flutter environment.
+      - uses: subosito/flutter-action@v2.4.0
+        with:
+          channel: "stable" # 'dev', 'alpha', default to: 'stable'
+
+      # Get flutter dependencies.
+      - run: flutter pub get
+
+      # Check for any formatting issues in the code.
+      - run: flutter format --set-exit-if-changed . -l 120
+
+      # Statically analyze the Dart code for any errors.
+      - run: flutter analyze .
