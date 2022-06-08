@@ -19,3 +19,7 @@ final AutoDisposeStateProvider<String> targetProvider = StateProvider.autoDispos
 final AutoDisposeStateProvider<String?> outputProvider = StateProvider.autoDispose<String?>(
   (AutoDisposeStateProviderRef<String?> ref) => '',
 );
+
+final AutoDisposeStateProvider<bool> autoProvider = StateProvider.autoDispose<bool>(
+  (AutoDisposeStateProviderRef<bool> ref) => false,
+);

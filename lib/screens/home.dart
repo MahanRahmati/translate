@@ -5,6 +5,7 @@ import '/providers.dart';
 import '/screens/languages.dart';
 import '/screens/settings.dart';
 import '/strings.dart';
+import '/utils/debouncer.dart';
 import '/utils/functions.dart';
 import '/utils/languages.dart';
 
@@ -17,6 +18,7 @@ class Home extends ConsumerStatefulWidget {
 
 class _HomeState extends ConsumerState<Home> {
   TextEditingController controller = TextEditingController();
+  final Debouncer _debouncer = Debouncer(milliseconds: 1000);
 
   @override
   void dispose() {
@@ -27,6 +29,7 @@ class _HomeState extends ConsumerState<Home> {
   @override
   Widget build(BuildContext context) {
     final bool showBlur = ref.watch(blurProvider);
+    final bool autoMode = ref.watch(autoProvider);
     final String sourceKey = ref.watch(sourceProvider);
     final String targetKey = ref.watch(targetProvider);
     final String source = languages[sourceKey]!;
@@ -118,6 +121,11 @@ class _HomeState extends ConsumerState<Home> {
       child: ArnaTextField(
         controller: controller,
         onSubmitted: (String text) => translate(context, sourceKey, targetKey, controller.text, ref),
+        onChanged: (String text) {
+          if (autoMode) {
+            _debouncer.run(() => translate(context, sourceKey, targetKey, controller.text, ref));
+          }
+        },
         clearButtonMode: ArnaOverlayVisibilityMode.editing,
         hintText: Strings.text,
         maxLength: 5000,

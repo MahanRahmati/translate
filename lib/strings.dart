@@ -7,6 +7,9 @@ abstract class Strings {
   static const String system = 'System';
   static const String dark = 'Dark';
   static const String light = 'Light';
+  static const String options = 'Options';
+  static const String auto = 'Enable Automatic translate';
+  static const String blurMode = 'Show blur on dialogs';
   static const String translate = 'Translate';
   static const String text = 'Text';
   static const String empty = 'Translation';
