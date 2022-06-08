@@ -48,6 +48,7 @@ class _LanguagesState extends ConsumerState<Languages> {
               preferences.setString('target', value!);
               ref.read(targetProvider.notifier).state = value;
             }
+            Navigator.pop(context);
           },
         ),
       );
