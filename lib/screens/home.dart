@@ -1,5 +1,6 @@
 import 'package:arna/arna.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '/providers.dart';
 import '/screens/languages.dart';
@@ -19,6 +20,15 @@ class Home extends ConsumerStatefulWidget {
 class _HomeState extends ConsumerState<Home> {
   TextEditingController controller = TextEditingController();
   final Debouncer _debouncer = Debouncer(milliseconds: 1000);
+  late SharedPreferences preferences;
+
+  @override
+  void initState() {
+    super.initState();
+    init();
+  }
+
+  Future<void> init() async => preferences = await SharedPreferences.getInstance();
 
   @override
   void dispose() {
@@ -51,9 +61,11 @@ class _HomeState extends ConsumerState<Home> {
         ArnaLinkedButton(
           icon: Icons.compare_arrows_outlined,
           onPressed: sourceKey != 'auto'
-              ? () {
+              ? () async {
                   final String s = sourceKey;
                   final String t = targetKey;
+                  preferences.setString('source', t);
+                  preferences.setString('target', s);
                   ref.read(sourceProvider.notifier).state = t;
                   ref.read(targetProvider.notifier).state = s;
                 }
@@ -91,9 +103,11 @@ class _HomeState extends ConsumerState<Home> {
           ArnaIconButton(
             icon: Icons.compare_arrows_outlined,
             onPressed: sourceKey != 'auto'
-                ? () {
+                ? () async {
                     final String s = sourceKey;
                     final String t = targetKey;
+                    preferences.setString('source', t);
+                    preferences.setString('target', s);
                     ref.read(sourceProvider.notifier).state = t;
                     ref.read(targetProvider.notifier).state = s;
                   }

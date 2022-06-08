@@ -15,6 +15,7 @@ dependencies:
     git: https://github.com/MahanRahmati/Arna.git
   flutter_riverpod: ^2.0.0-dev.9
   http: ^0.13.4
+  shared_preferences: ^2.0.15
 
 dev_dependencies:
   flutter_test:
