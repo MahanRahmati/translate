@@ -23,6 +23,7 @@ Future<void> translate(BuildContext context, String sourceKey, String targetKey,
         message: 'Something went wrong! Error code: ${response.statusCode}',
       );
       ref.read(outputProvider.notifier).state = '';
+      return;
     }
 
     // ignore: avoid_dynamic_calls
@@ -34,6 +35,7 @@ Future<void> translate(BuildContext context, String sourceKey, String targetKey,
         message: 'Something went wrong!',
       );
       ref.read(outputProvider.notifier).state = '';
+      return;
     }
 
     ref.read(outputProvider.notifier).state = translation;
