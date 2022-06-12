@@ -1,6 +1,6 @@
 abstract class Strings {
   static const String appName = 'Arna Translate';
-  static const String version = '2.0.4';
+  static const String version = '2.0.5';
   static const String about = 'About';
   static const String settings = 'Settings';
   static const String theme = 'Theme';
