@@ -41,7 +41,7 @@ class _HomeState extends ConsumerState<Home> {
         buttonType: ButtonType.colored,
       ),
       title: Strings.appName,
-      headerBarMiddle: isExpanded(context) ? const ControllersButtons() : null,
+      headerBarMiddle: ArnaHelpers.isExpanded(context) ? const ControllersButtons() : null,
       actions: const <Widget>[
         HistoryButton(),
         AboutButton(),
@@ -52,11 +52,11 @@ class _HomeState extends ConsumerState<Home> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             SizedBox(
-              width: deviceWidth(context) / 2,
+              width: ArnaHelpers.deviceWidth(context) / 2,
               child: input,
             ),
             SizedBox(
-              width: deviceWidth(context) / 2,
+              width: ArnaHelpers.deviceWidth(context) / 2,
               child: const OutputWidget(),
             ),
           ],
