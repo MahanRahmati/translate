@@ -19,4 +19,14 @@ abstract class Strings {
   static const String swap = 'Swap';
   static const String copy = 'Copy to clipboard';
   static const String search = 'Search...';
+  static const String historyBox = 'historyBox';
+  static const String history = 'History';
+  static const String deleteAll = 'Delete all';
+  static const String deleteTitle = 'Are you sure you want to clear history?';
+  static const String deleteDescription = "You can't undo this action.";
+  static const String clear = 'Clear History';
+  static const String cancel = 'Cancel';
+  static const String emptyHistory = 'No History';
+  static const String emptyHistoryDescription = 'Your history will appear here.';
+  static const String error = 'Something went wrong!';
 }
