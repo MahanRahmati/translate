@@ -12,7 +12,7 @@ abstract class Strings {
   static const String blurMode = 'Show blur on dialogs';
   static const String translate = 'Translate';
   static const String text = 'Text';
-  static const String empty = 'Translation';
+  static const String translation = 'Translation';
   static const String source = 'Source language';
   static const String target = 'Target language';
   static const String language = 'Languages';
