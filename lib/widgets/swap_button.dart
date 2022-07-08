@@ -5,24 +5,18 @@ import '/providers.dart';
 import '/strings.dart';
 import '/utils/storage.dart';
 
-class SwapButton extends ConsumerStatefulWidget {
+class SwapButton extends ConsumerWidget {
   const SwapButton({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _SwapButtonState();
-}
-
-class _SwapButtonState extends ConsumerState<SwapButton> {
-  final SharedStorage storage = SharedStorage.instance;
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final String sourceKey = ref.watch(sourceProvider);
     final String targetKey = ref.watch(targetProvider);
+    final SharedStorage storage = SharedStorage.instance;
     return ArnaIconButton(
       icon: Icons.compare_arrows_outlined,
       onPressed: sourceKey != 'auto'
-          ? () async {
+          ? () {
               final String s = sourceKey;
               final String t = targetKey;
               storage.setSource(t);

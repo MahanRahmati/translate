@@ -4,12 +4,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '/providers.dart';
 import '/strings.dart';
 import '/utils/functions.dart';
-import '/widgets/about.dart';
+import '/widgets/about_button.dart';
 import '/widgets/controllers.dart';
 import '/widgets/controllers_buttons.dart';
 import '/widgets/input.dart';
 import '/widgets/output.dart';
-import '/widgets/settings.dart';
+import '/widgets/settings_button.dart';
 
 class Home extends ConsumerStatefulWidget {
   const Home({super.key});
