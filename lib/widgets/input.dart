@@ -21,16 +21,14 @@ class _InputWidgetState extends ConsumerState<InputWidget> {
   @override
   Widget build(BuildContext context) {
     final bool autoMode = ref.watch(autoProvider);
-    final String sourceKey = ref.watch(sourceProvider);
-    final String targetKey = ref.watch(targetProvider);
     return Padding(
       padding: Styles.small,
       child: ArnaTextField(
         controller: widget.controller,
-        onSubmitted: (String text) => translate(context, sourceKey, targetKey, widget.controller.text, ref),
+        onSubmitted: (String text) => translate(context, widget.controller.text, ref),
         onChanged: (String text) {
           if (autoMode) {
-            _debouncer.run(() => translate(context, sourceKey, targetKey, widget.controller.text, ref));
+            _debouncer.run(() => translate(context, widget.controller.text, ref));
           }
         },
         clearButtonMode: ArnaOverlayVisibilityMode.editing,
