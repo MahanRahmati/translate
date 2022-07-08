@@ -1,10 +1,10 @@
 import 'package:arna/arna.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '/providers.dart';
 import '/strings.dart';
 import '/utils/languages.dart';
+import '/utils/storage.dart';
 
 class Languages extends ConsumerStatefulWidget {
   const Languages({
@@ -19,19 +19,11 @@ class Languages extends ConsumerStatefulWidget {
 }
 
 class _LanguagesState extends ConsumerState<Languages> {
-  late SharedPreferences preferences;
+  final SharedStorage storage = SharedStorage.instance;
   TextEditingController controller = TextEditingController();
   final List<ArnaRadioListTile<String>> list = <ArnaRadioListTile<String>>[];
   final List<ArnaRadioListTile<String>> filteredList = <ArnaRadioListTile<String>>[];
   bool queryIsEmpty = true;
-
-  @override
-  void initState() {
-    super.initState();
-    init();
-  }
-
-  Future<void> init() async => preferences = await SharedPreferences.getInstance();
 
   Future<void> search(String query, String groupValue) async {
     if (query.isEmpty) {
@@ -52,10 +44,10 @@ class _LanguagesState extends ConsumerState<Languages> {
               title: languages[key]!,
               onChanged: (String? value) async {
                 if (widget.source) {
-                  preferences.setString('source', value!);
+                  storage.setSource(value!);
                   ref.read(sourceProvider.notifier).state = value;
                 } else {
-                  preferences.setString('target', value!);
+                  storage.setTarget(value!);
                   ref.read(targetProvider.notifier).state = value;
                 }
                 Navigator.pop(context);
@@ -79,10 +71,10 @@ class _LanguagesState extends ConsumerState<Languages> {
           title: languages[key]!,
           onChanged: (String? value) async {
             if (widget.source) {
-              preferences.setString('source', value!);
+              storage.setSource(value!);
               ref.read(sourceProvider.notifier).state = value;
             } else {
-              preferences.setString('target', value!);
+              storage.setTarget(value!);
               ref.read(targetProvider.notifier).state = value;
             }
             Navigator.pop(context);

@@ -1,11 +1,11 @@
 import 'package:arna/arna.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '/providers.dart';
 import '/screens/languages.dart';
 import '/strings.dart';
 import '/utils/languages.dart';
+import '/utils/storage.dart';
 
 class ControllersButtons extends ConsumerStatefulWidget {
   const ControllersButtons({super.key});
@@ -15,15 +15,7 @@ class ControllersButtons extends ConsumerStatefulWidget {
 }
 
 class _ControllersButtonsState extends ConsumerState<ControllersButtons> {
-  late SharedPreferences preferences;
-
-  @override
-  void initState() {
-    super.initState();
-    init();
-  }
-
-  Future<void> init() async => preferences = await SharedPreferences.getInstance();
+  final SharedStorage storage = SharedStorage.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -49,8 +41,8 @@ class _ControllersButtonsState extends ConsumerState<ControllersButtons> {
               ? () async {
                   final String s = sourceKey;
                   final String t = targetKey;
-                  preferences.setString('source', t);
-                  preferences.setString('target', s);
+                  storage.setSource(t);
+                  storage.setTarget(s);
                   ref.read(sourceProvider.notifier).state = t;
                   ref.read(targetProvider.notifier).state = s;
                 }

@@ -1,9 +1,9 @@
 import 'package:arna/arna.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '/providers.dart';
 import '/strings.dart';
+import '/utils/storage.dart';
 
 class Settings extends ConsumerStatefulWidget {
   const Settings({super.key});
@@ -13,15 +13,7 @@ class Settings extends ConsumerStatefulWidget {
 }
 
 class _SettingsState extends ConsumerState<Settings> {
-  late SharedPreferences preferences;
-
-  @override
-  void initState() {
-    super.initState();
-    init();
-  }
-
-  Future<void> init() async => preferences = await SharedPreferences.getInstance();
+  final SharedStorage storage = SharedStorage.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +33,7 @@ class _SettingsState extends ConsumerState<Settings> {
                 groupValue: themeMode,
                 title: Strings.system,
                 onChanged: (_) async {
-                  preferences.setInt('theme', 0);
+                  storage.setTheme(0);
                   ref.read(themeProvider.notifier).state = null;
                 },
               ),
@@ -50,7 +42,7 @@ class _SettingsState extends ConsumerState<Settings> {
                 groupValue: themeMode,
                 title: Strings.dark,
                 onChanged: (_) async {
-                  preferences.setInt('theme', 1);
+                  storage.setTheme(1);
                   ref.read(themeProvider.notifier).state = Brightness.dark;
                 },
               ),
@@ -59,7 +51,7 @@ class _SettingsState extends ConsumerState<Settings> {
                 groupValue: themeMode,
                 title: Strings.light,
                 onChanged: (_) async {
-                  preferences.setInt('theme', 2);
+                  storage.setTheme(2);
                   ref.read(themeProvider.notifier).state = Brightness.light;
                 },
               ),
@@ -74,7 +66,7 @@ class _SettingsState extends ConsumerState<Settings> {
                 value: autoMode,
                 title: Strings.auto,
                 onChanged: (_) async {
-                  preferences.setBool('auto', !autoMode);
+                  storage.setAuto(!autoMode);
                   ref.read(autoProvider.notifier).state = !autoMode;
                 },
               ),
@@ -82,7 +74,7 @@ class _SettingsState extends ConsumerState<Settings> {
                 value: blurMode,
                 title: Strings.blurMode,
                 onChanged: (_) async {
-                  preferences.setBool('blur', !blurMode);
+                  storage.setBlur(!blurMode);
                   ref.read(blurProvider.notifier).state = !blurMode;
                 },
               ),
