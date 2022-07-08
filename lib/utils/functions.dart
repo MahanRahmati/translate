@@ -4,9 +4,17 @@ import 'package:arna/arna.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
+import '/db/history_db.dart';
 import '/providers.dart';
+import '/strings.dart';
 
-Future<void> translate(BuildContext context, String sourceKey, String targetKey, String query, WidgetRef ref) async {
+Future<void> translate(
+  BuildContext context,
+  String sourceKey,
+  String targetKey,
+  String query,
+  WidgetRef ref,
+) async {
   if (query.isEmpty) {
     return;
   }
@@ -20,7 +28,7 @@ Future<void> translate(BuildContext context, String sourceKey, String targetKey,
     if (response.statusCode != 200) {
       showArnaSnackbar(
         context: context,
-        message: 'Something went wrong! Error code: ${response.statusCode}',
+        message: '${Strings.error} Error code: ${response.statusCode}',
       );
       ref.read(outputProvider.notifier).state = '';
       return;
@@ -32,12 +40,13 @@ Future<void> translate(BuildContext context, String sourceKey, String targetKey,
     if (translation == null) {
       showArnaSnackbar(
         context: context,
-        message: 'Something went wrong!',
+        message: Strings.error,
       );
       ref.read(outputProvider.notifier).state = '';
       return;
     }
 
+    HistoryDB.instance.add(query, translation);
     ref.read(outputProvider.notifier).state = translation;
   } catch (_) {}
 }
