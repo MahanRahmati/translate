@@ -35,7 +35,12 @@ class OutputWidget extends ConsumerWidget {
               const Spacer(),
               ArnaIconButton(
                 icon: Icons.copy_outlined,
-                onPressed: outputText != null && outputText.isNotEmpty ? () => copyToClipboard(outputText) : null,
+                onPressed: outputText != null && outputText.isNotEmpty
+                    ? () {
+                        copyToClipboard(outputText);
+                        showArnaSnackbar(context: context, message: Strings.copyToast);
+                      }
+                    : null,
                 tooltipMessage: Strings.copy,
               ),
             ],
