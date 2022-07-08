@@ -5,7 +5,7 @@ import '/providers.dart';
 import '/screens/languages.dart';
 import '/strings.dart';
 import '/utils/languages.dart';
-import 'swap_button.dart';
+import '/widgets/swap_button.dart';
 
 class ControllersWidget extends ConsumerWidget {
   const ControllersWidget({super.key});

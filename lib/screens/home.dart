@@ -9,7 +9,7 @@ import '/widgets/controllers.dart';
 import '/widgets/controllers_buttons.dart';
 import '/widgets/input.dart';
 import '/widgets/output.dart';
-import '../widgets/settings_button.dart';
+import '/widgets/settings_button.dart';
 
 class Home extends ConsumerStatefulWidget {
   const Home({super.key});
