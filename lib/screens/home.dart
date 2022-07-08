@@ -1,7 +1,6 @@
 import 'package:arna/arna.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '/providers.dart';
 import '/strings.dart';
 import '/utils/functions.dart';
 import '/widgets/about_button.dart';
@@ -30,13 +29,13 @@ class _HomeState extends ConsumerState<Home> {
 
   @override
   Widget build(BuildContext context) {
-    final String sourceKey = ref.watch(sourceProvider);
-    final String targetKey = ref.watch(targetProvider);
-
+    final Widget input = InputWidget(
+      controller: controller,
+    );
     return ArnaScaffold(
       headerBarLeading: ArnaTextButton(
         label: Strings.translate,
-        onPressed: () => translate(context, sourceKey, targetKey, controller.text, ref),
+        onPressed: () => translate(context, controller.text, ref),
         buttonType: ButtonType.colored,
       ),
       title: Strings.appName,
@@ -50,16 +49,29 @@ class _HomeState extends ConsumerState<Home> {
         expanded: Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            SizedBox(width: deviceWidth(context) / 2, child: InputWidget(controller: controller)),
-            SizedBox(width: deviceWidth(context) / 2, child: const OutputWidget()),
+            SizedBox(
+              width: deviceWidth(context) / 2,
+              child: input,
+            ),
+            SizedBox(
+              width: deviceWidth(context) / 2,
+              child: const OutputWidget(),
+            ),
           ],
         ),
         compact: Column(
           children: <Widget>[
             const ControllersWidget(),
             const ArnaDivider(),
-            Expanded(child: InputWidget(controller: controller)),
-            const Expanded(child: SafeArea(top: false, child: OutputWidget())),
+            Expanded(
+              child: input,
+            ),
+            const Expanded(
+              child: SafeArea(
+                top: false,
+                child: OutputWidget(),
+              ),
+            ),
           ],
         ),
       ),

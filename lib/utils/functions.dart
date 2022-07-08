@@ -10,8 +10,6 @@ import '/strings.dart';
 
 Future<void> translate(
   BuildContext context,
-  String sourceKey,
-  String targetKey,
   String query,
   WidgetRef ref,
 ) async {
@@ -20,6 +18,8 @@ Future<void> translate(
   }
 
   ref.read(outputProvider.notifier).state = null;
+  final String sourceKey = ref.watch(sourceProvider);
+  final String targetKey = ref.watch(targetProvider);
   try {
     final http.Response response = await http.get(
       Uri.https('lingva.ml', '/api/v1/$sourceKey/$targetKey/$query'),
