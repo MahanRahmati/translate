@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '/strings.dart';
 import '/utils/functions.dart';
+import '/utils/system_overlay.dart';
 import '/widgets/about_button.dart';
 import '/widgets/controllers.dart';
 import '/widgets/controllers_buttons.dart';
@@ -29,6 +30,7 @@ class _HomeState extends ConsumerState<Home> {
 
   @override
   Widget build(BuildContext context) {
+    updateSystemUIOverlayStyle(context);
     final Widget input = InputWidget(
       controller: controller,
     );
