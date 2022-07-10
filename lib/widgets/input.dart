@@ -20,7 +20,6 @@ class _InputWidgetState extends ConsumerState<InputWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final bool autoMode = ref.watch(autoProvider);
     return Padding(
       padding: Styles.small,
       child: ArnaTextField(
@@ -30,9 +29,7 @@ class _InputWidgetState extends ConsumerState<InputWidget> {
           if (text.isEmpty) {
             ref.read(outputProvider.notifier).state = '';
           }
-          if (autoMode) {
-            _debouncer.run(() => translate(context, widget.controller.text, ref));
-          }
+          _debouncer.run(() => translate(context, widget.controller.text, ref));
         },
         clearButtonMode: ArnaOverlayVisibilityMode.editing,
         hintText: Strings.text,

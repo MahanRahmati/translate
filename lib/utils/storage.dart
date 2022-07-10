@@ -16,16 +16,6 @@ class SharedStorage {
     _storage.setInt('theme', theme);
   }
 
-  bool? get auto => _storage.getBool('auto');
-  void setAuto(final bool auto) {
-    _storage.setBool('auto', auto);
-  }
-
-  bool? get blur => _storage.getBool('blur');
-  void setBlur(final bool blur) {
-    _storage.setBool('blur', blur);
-  }
-
   String? get source => _storage.getString('source');
   void setSource(final String source) {
     _storage.setString('source', source);

@@ -5,10 +5,6 @@ final AutoDisposeStateProvider<Brightness?> themeProvider = StateProvider.autoDi
   (AutoDisposeStateProviderRef<Brightness?> ref) => null,
 );
 
-final AutoDisposeStateProvider<bool> blurProvider = StateProvider.autoDispose<bool>(
-  (AutoDisposeStateProviderRef<bool> ref) => !kIsWeb,
-);
-
 final AutoDisposeStateProvider<String> sourceProvider = StateProvider.autoDispose<String>(
   (AutoDisposeStateProviderRef<String> ref) => 'auto',
 );
@@ -19,8 +15,4 @@ final AutoDisposeStateProvider<String> targetProvider = StateProvider.autoDispos
 
 final AutoDisposeStateProvider<String?> outputProvider = StateProvider.autoDispose<String?>(
   (AutoDisposeStateProviderRef<String?> ref) => '',
-);
-
-final AutoDisposeStateProvider<bool> autoProvider = StateProvider.autoDispose<bool>(
-  (AutoDisposeStateProviderRef<bool> ref) => false,
 );

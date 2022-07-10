@@ -19,7 +19,6 @@ class _ControllersButtonsState extends ConsumerState<ControllersButtons> {
 
   @override
   Widget build(BuildContext context) {
-    final bool showBlur = ref.watch(blurProvider);
     final String sourceKey = ref.watch(sourceProvider);
     final String targetKey = ref.watch(targetProvider);
     final String source = languages[sourceKey]!;
@@ -32,7 +31,6 @@ class _ControllersButtonsState extends ConsumerState<ControllersButtons> {
             context: context,
             title: Strings.source,
             builder: (BuildContext context) => const Languages(source: true),
-            useBlur: showBlur,
           ),
         ),
         ArnaLinkedButton(
@@ -55,7 +53,6 @@ class _ControllersButtonsState extends ConsumerState<ControllersButtons> {
             context: context,
             title: Strings.target,
             builder: (BuildContext context) => const Languages(source: false),
-            useBlur: showBlur,
           ),
         ),
       ],

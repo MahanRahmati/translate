@@ -12,7 +12,6 @@ class ControllersWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final bool showBlur = ref.watch(blurProvider);
     final String sourceKey = ref.watch(sourceProvider);
     final String targetKey = ref.watch(targetProvider);
     final String source = languages[sourceKey]!;
@@ -28,7 +27,6 @@ class ControllersWidget extends ConsumerWidget {
                 context: context,
                 title: Strings.source,
                 builder: (BuildContext context) => const Languages(source: true),
-                useBlur: showBlur,
               ),
               buttonSize: ButtonSize.huge,
             ),
@@ -41,7 +39,6 @@ class ControllersWidget extends ConsumerWidget {
                 context: context,
                 title: Strings.target,
                 builder: (BuildContext context) => const Languages(source: false),
-                useBlur: showBlur,
               ),
               buttonSize: ButtonSize.huge,
             ),

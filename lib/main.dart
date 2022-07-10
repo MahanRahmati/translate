@@ -42,16 +42,6 @@ class _MyAppState extends ConsumerState<MyApp> {
       ref.read(themeProvider.notifier).state = Brightness.light;
     }
 
-    final bool? auto = storage.auto;
-    if (auto != null) {
-      ref.read(autoProvider.notifier).state = auto;
-    }
-
-    final bool? blur = storage.blur;
-    if (blur != null) {
-      ref.read(blurProvider.notifier).state = blur;
-    }
-
     final String? source = storage.source;
     if (source != null) {
       ref.read(sourceProvider.notifier).state = source;
