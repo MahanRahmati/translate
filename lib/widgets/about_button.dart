@@ -1,7 +1,6 @@
 import 'package:arna/arna.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '/providers.dart';
 import '/strings.dart';
 
 class AboutButton extends ConsumerWidget {
@@ -9,7 +8,6 @@ class AboutButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final bool showBlur = ref.watch(blurProvider);
     return ArnaIconButton(
       icon: Icons.info_outlined,
       onPressed: () => showArnaAboutDialog(
@@ -23,7 +21,6 @@ class AboutButton extends ConsumerWidget {
         developerName: 'Mahan Rahmati',
         applicationVersion: Strings.version,
         applicationUri: Uri(scheme: 'https', host: 'github.com', path: 'MahanRahmati/translate/issues'),
-        useBlur: showBlur,
       ),
       tooltipMessage: Strings.about,
     );

@@ -18,8 +18,6 @@ class _SettingsState extends ConsumerState<Settings> {
   @override
   Widget build(BuildContext context) {
     final Brightness? themeMode = ref.watch(themeProvider);
-    final bool autoMode = ref.watch(autoProvider);
-    final bool blurMode = ref.watch(blurProvider);
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
@@ -53,29 +51,6 @@ class _SettingsState extends ConsumerState<Settings> {
                 onChanged: (_) async {
                   storage.setTheme(2);
                   ref.read(themeProvider.notifier).state = Brightness.light;
-                },
-              ),
-            ],
-          ),
-          ArnaList(
-            title: Strings.options,
-            showDividers: true,
-            showBackground: true,
-            children: <Widget>[
-              ArnaSwitchListTile(
-                value: autoMode,
-                title: Strings.auto,
-                onChanged: (_) async {
-                  storage.setAuto(!autoMode);
-                  ref.read(autoProvider.notifier).state = !autoMode;
-                },
-              ),
-              ArnaSwitchListTile(
-                value: blurMode,
-                title: Strings.blurMode,
-                onChanged: (_) async {
-                  storage.setBlur(!blurMode);
-                  ref.read(blurProvider.notifier).state = !blurMode;
                 },
               ),
             ],
