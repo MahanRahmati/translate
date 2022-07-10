@@ -2,7 +2,6 @@ import 'package:arna/arna.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '/strings.dart';
-import '/utils/functions.dart';
 import '/utils/system_overlay.dart';
 import '/widgets/about_button.dart';
 import '/widgets/controllers.dart';
@@ -35,11 +34,6 @@ class _HomeState extends ConsumerState<Home> {
       controller: controller,
     );
     return ArnaScaffold(
-      headerBarLeading: ArnaTextButton(
-        label: Strings.translate,
-        onPressed: () => translate(context, controller.text, ref),
-        buttonType: ButtonType.colored,
-      ),
       title: Strings.appName,
       headerBarMiddle: ArnaHelpers.isExpanded(context) ? const ControllersButtons() : null,
       actions: const <Widget>[
