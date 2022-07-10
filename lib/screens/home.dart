@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '/strings.dart';
 import '/utils/system_overlay.dart';
-import '/widgets/about_button.dart';
 import '/widgets/controllers.dart';
 import '/widgets/controllers_buttons.dart';
 import '/widgets/history_button.dart';
@@ -38,7 +37,6 @@ class _HomeState extends ConsumerState<Home> {
       headerBarMiddle: ArnaHelpers.isExpanded(context) ? const ControllersButtons() : null,
       actions: const <Widget>[
         HistoryButton(),
-        AboutButton(),
         SettingsButton(),
       ],
       body: ArnaBody(
