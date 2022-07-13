@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '/screens/settings.dart';
 import '/strings.dart';
+import '/widgets/about_button.dart';
 
 class SettingsButton extends ConsumerWidget {
   const SettingsButton({super.key});
@@ -14,6 +15,9 @@ class SettingsButton extends ConsumerWidget {
       onPressed: () => showArnaPopupDialog(
         context: context,
         title: Strings.settings,
+        actions: const <Widget>[
+          AboutButton(),
+        ],
         builder: (BuildContext context) => const Settings(),
       ),
       tooltipMessage: Strings.settings,
