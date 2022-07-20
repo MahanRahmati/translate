@@ -63,11 +63,18 @@ class _LanguagesState extends ConsumerState<Languages> {
 
   @override
   Widget build(BuildContext context) {
-    final String groupValue =
-        widget.source ? ref.watch(sourceProvider) : ref.watch(targetProvider);
+    final String sourceKey = ref.watch(sourceProvider);
+    final String targetKey = ref.watch(targetProvider);
+    final String groupValue = widget.source ? sourceKey : targetKey;
     if (queryIsEmpty) {
       languages.forEach((String key, String value) {
+        // Target language can't be 'Auto'
         if (key == 'auto' && !widget.source) {
+          return;
+        }
+        // Not translating a language to itself
+        if ((key == sourceKey && !widget.source) ||
+            (key == targetKey && widget.source)) {
           return;
         }
         final ArnaRadioListTile<String> item = ArnaRadioListTile<String>(
