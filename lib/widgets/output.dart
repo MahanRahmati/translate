@@ -22,11 +22,16 @@ class OutputWidget extends ConsumerWidget {
                     child: outputText.isEmpty
                         ? Text(
                             Strings.translation,
-                            style: ArnaTheme.of(context).textTheme.body!.copyWith(
-                                  color: ArnaDynamicColor.resolve(ArnaColors.secondaryTextColor, context),
-                                ),
+                            style:
+                                ArnaTheme.of(context).textTheme.body!.copyWith(
+                                      color: ArnaColors.secondaryTextColor
+                                          .resolveFrom(context),
+                                    ),
                           )
-                        : ArnaSelectableText(outputText, style: ArnaTheme.of(context).textTheme.body),
+                        : ArnaSelectableText(
+                            outputText,
+                            style: ArnaTheme.of(context).textTheme.body,
+                          ),
                   ),
           ),
           const ArnaDivider(),
@@ -38,7 +43,10 @@ class OutputWidget extends ConsumerWidget {
                 onPressed: outputText != null && outputText.isNotEmpty
                     ? () {
                         ArnaHelpers.copyToClipboard(outputText);
-                        showArnaSnackbar(context: context, message: Strings.copyToast);
+                        showArnaSnackbar(
+                          context: context,
+                          message: Strings.copyToast,
+                        );
                       }
                     : null,
                 tooltipMessage: Strings.copy,
