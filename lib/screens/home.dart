@@ -1,5 +1,6 @@
 import 'package:arna/arna.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:translate/providers.dart';
 
 import '/strings.dart';
 import '/utils/system_overlay.dart';
@@ -18,20 +19,11 @@ class Home extends ConsumerStatefulWidget {
 }
 
 class _HomeState extends ConsumerState<Home> {
-  TextEditingController controller = TextEditingController();
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
+    final String inputText = ref.read(inputProvider);
     updateSystemUIOverlayStyle(context);
-    final Widget input = InputWidget(
-      controller: controller,
-    );
+    final Widget input = InputWidget(placeholder: inputText);
     return ArnaScaffold(
       title: Strings.appName,
       headerBarMiddle:
