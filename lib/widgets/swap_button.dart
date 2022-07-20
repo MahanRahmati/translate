@@ -13,7 +13,7 @@ class SwapButton extends ConsumerWidget {
     final String sourceKey = ref.watch(sourceProvider);
     final String targetKey = ref.watch(targetProvider);
     final SharedStorage storage = SharedStorage.instance;
-    return ArnaIconButton(
+    return ArnaBorderlessButton(
       icon: Icons.compare_arrows_outlined,
       onPressed: sourceKey != 'auto'
           ? () {
