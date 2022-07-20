@@ -7,8 +7,12 @@ import '/utils/debouncer.dart';
 import '/utils/functions.dart';
 
 class InputWidget extends ConsumerStatefulWidget {
-  const InputWidget({required this.placeholder, super.key});
-  final String placeholder;
+  const InputWidget({
+    super.key,
+    required this.input,
+  });
+
+  final String input;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _InputWidgetState();
@@ -17,33 +21,28 @@ class InputWidget extends ConsumerStatefulWidget {
 class _InputWidgetState extends ConsumerState<InputWidget> {
   final Debouncer _debouncer = Debouncer(milliseconds: 1000);
   TextEditingController controller = TextEditingController();
+
   @override
   void initState() {
-    controller.text = widget.placeholder;
+    controller.text = widget.input;
     super.initState();
+  }
+
+  void onChanged(String text) {
+    if (text.isEmpty) {
+      ref.read(outputProvider.notifier).state = '';
+    }
+    ref.read(inputProvider.notifier).state = text;
+    _debouncer.run(() => translate(context, ref));
   }
 
   @override
   Widget build(BuildContext context) {
-    //controller.text = ref.watch(inputProvider);
     return Padding(
       padding: Styles.small,
       child: ArnaTextField(
         controller: controller,
-        onSubmitted: (String text) {
-          ref.read(inputProvider.notifier).state = text;
-          translate(context, ref);
-        },
-        onChanged: (String text) {
-          if (text.isEmpty) {
-            ref.read(outputProvider.notifier).state = '';
-          } else {
-            ref.read(inputProvider.notifier).state = text;
-          }
-          _debouncer.run(() {
-            translate(context, ref);
-          });
-        },
+        onChanged: onChanged,
         clearButtonMode: ArnaOverlayVisibilityMode.editing,
         hintText: Strings.text,
         maxLength: 5000,
