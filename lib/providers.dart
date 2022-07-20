@@ -16,7 +16,10 @@ final AutoDisposeStateProvider<String> targetProvider =
   (AutoDisposeStateProviderRef<String> ref) => 'en',
 );
 
-final AutoDisposeStateProvider<String?> outputProvider =
-    StateProvider.autoDispose<String?>(
-  (AutoDisposeStateProviderRef<String?> ref) => '',
+final StateProvider<String> inputProvider = StateProvider<String>(
+  (StateProviderRef<String> ref) => '',
+);
+
+final StateProvider<String?> outputProvider = StateProvider<String?>(
+  (StateProviderRef<String?> ref) => '',
 );

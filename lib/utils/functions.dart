@@ -10,16 +10,16 @@ import '/strings.dart';
 
 Future<void> translate(
   BuildContext context,
-  String query,
   WidgetRef ref,
 ) async {
+  final String query = ref.watch(inputProvider);
   if (query.isEmpty) {
     return;
   }
-
   ref.read(outputProvider.notifier).state = null;
   final String sourceKey = ref.watch(sourceProvider);
   final String targetKey = ref.watch(targetProvider);
+
   try {
     final http.Response response = await http.get(
       Uri.https('lingva.ml', '/api/v1/$sourceKey/$targetKey/$query'),
@@ -48,6 +48,8 @@ Future<void> translate(
     }
 
     HistoryDB.instance.add(query, translation);
-    ref.read(outputProvider.notifier).state = translation;
-  } catch (_) {}
+    ref.watch(outputProvider.notifier).state = translation; // TODO(fix)
+  } catch (e) {
+    debugPrint(e.toString());
+  }
 }

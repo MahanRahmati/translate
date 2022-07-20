@@ -18,20 +18,10 @@ class Home extends ConsumerStatefulWidget {
 }
 
 class _HomeState extends ConsumerState<Home> {
-  TextEditingController controller = TextEditingController();
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     updateSystemUIOverlayStyle(context);
-    final Widget input = InputWidget(
-      controller: controller,
-    );
+    const Widget input = InputWidget();
     return ArnaScaffold(
       title: Strings.appName,
       headerBarMiddle:
@@ -55,13 +45,13 @@ class _HomeState extends ConsumerState<Home> {
           ],
         ),
         compact: Column(
-          children: <Widget>[
-            const ControllersWidget(),
-            const ArnaDivider(),
+          children: const <Widget>[
+            ControllersWidget(),
+            ArnaDivider(),
             Expanded(
               child: input,
             ),
-            const Expanded(
+            Expanded(
               child: SafeArea(
                 top: false,
                 child: OutputWidget(),
