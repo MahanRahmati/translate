@@ -7,7 +7,8 @@ import '/utils/debouncer.dart';
 import '/utils/functions.dart';
 
 class InputWidget extends ConsumerStatefulWidget {
-  const InputWidget({super.key});
+  const InputWidget({required this.placeholder, super.key});
+  final String placeholder;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _InputWidgetState();
@@ -16,10 +17,15 @@ class InputWidget extends ConsumerStatefulWidget {
 class _InputWidgetState extends ConsumerState<InputWidget> {
   final Debouncer _debouncer = Debouncer(milliseconds: 1000);
   TextEditingController controller = TextEditingController();
+  @override
+  void initState() {
+    controller.text = widget.placeholder;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    //ref.watch(inputProvider);
+    //controller.text = ref.watch(inputProvider);
     return Padding(
       padding: Styles.small,
       child: ArnaTextField(

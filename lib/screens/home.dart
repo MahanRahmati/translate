@@ -1,5 +1,6 @@
 import 'package:arna/arna.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:translate/providers.dart';
 
 import '/strings.dart';
 import '/utils/system_overlay.dart';
@@ -20,8 +21,9 @@ class Home extends ConsumerStatefulWidget {
 class _HomeState extends ConsumerState<Home> {
   @override
   Widget build(BuildContext context) {
+    final String inputText = ref.read(inputProvider);
     updateSystemUIOverlayStyle(context);
-    const Widget input = InputWidget();
+    final Widget input = InputWidget(placeholder: inputText);
     return ArnaScaffold(
       title: Strings.appName,
       headerBarMiddle:
@@ -47,11 +49,11 @@ class _HomeState extends ConsumerState<Home> {
           ],
         ),
         compact: Column(
-          children: const <Widget>[
+          children: <Widget>[
             Expanded(
               child: input,
             ),
-            Expanded(
+            const Expanded(
               child: SafeArea(
                 top: false,
                 child: OutputWidget(),
