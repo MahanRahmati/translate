@@ -26,7 +26,8 @@ class _LanguagesState extends ConsumerState<Languages> {
       <ArnaRadioListTile<String>>[];
   bool queryIsEmpty = true;
 
-  Future<void> search(String query, String groupValue) async {
+  Future<void> search(String query, String sourceKey, String targetKey) async {
+    final String groupValue = widget.source ? sourceKey : targetKey;
     if (query.isEmpty) {
       queryIsEmpty = true;
       filteredList.clear();
@@ -37,6 +38,11 @@ class _LanguagesState extends ConsumerState<Languages> {
       queryIsEmpty = false;
       filteredList.clear();
       languages.forEach((String key, String value) {
+        // Not translating a language to itself
+        if ((key == sourceKey && !widget.source) ||
+            (key == targetKey && widget.source)) {
+          return;
+        }
         if (languages[key]!.toLowerCase().contains(query.toLowerCase())) {
           filteredList.add(
             ArnaRadioListTile<String>(
@@ -102,7 +108,7 @@ class _LanguagesState extends ConsumerState<Languages> {
         ArnaSearchField(
           showSearch: true,
           controller: controller,
-          onChanged: (String text) => search(text, groupValue),
+          onChanged: (String text) => search(text, sourceKey, targetKey),
           hintText: Strings.search,
         ),
         const ArnaDivider(),
