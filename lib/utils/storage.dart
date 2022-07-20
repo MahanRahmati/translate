@@ -11,9 +11,9 @@ class SharedStorage {
     _storage = await SharedPreferences.getInstance();
   }
 
-  int? get theme => _storage.getInt('theme');
-  void setTheme(final int theme) {
-    _storage.setInt('theme', theme);
+  String? get theme => _storage.getString('theme');
+  void setTheme(final String theme) {
+    _storage.setString('theme', theme);
   }
 
   String? get source => _storage.getString('source');

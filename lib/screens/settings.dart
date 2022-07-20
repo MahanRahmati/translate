@@ -1,9 +1,8 @@
 import 'package:arna/arna.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '/providers.dart';
+import '/providers/theme.dart';
 import '/strings.dart';
-import '/utils/storage.dart';
 
 class Settings extends ConsumerStatefulWidget {
   const Settings({super.key});
@@ -13,8 +12,6 @@ class Settings extends ConsumerStatefulWidget {
 }
 
 class _SettingsState extends ConsumerState<Settings> {
-  final SharedStorage storage = SharedStorage.instance;
-
   @override
   Widget build(BuildContext context) {
     final Brightness? themeMode = ref.watch(themeProvider);
@@ -31,8 +28,7 @@ class _SettingsState extends ConsumerState<Settings> {
                 groupValue: themeMode,
                 title: Strings.system,
                 onChanged: (_) async {
-                  storage.setTheme(0);
-                  ref.read(themeProvider.notifier).state = null;
+                  ref.read(themeProvider.notifier).setTheme(null);
                 },
               ),
               ArnaRadioListTile<Brightness?>(
@@ -40,8 +36,7 @@ class _SettingsState extends ConsumerState<Settings> {
                 groupValue: themeMode,
                 title: Strings.dark,
                 onChanged: (_) async {
-                  storage.setTheme(1);
-                  ref.read(themeProvider.notifier).state = Brightness.dark;
+                  ref.read(themeProvider.notifier).setTheme(Brightness.dark);
                 },
               ),
               ArnaRadioListTile<Brightness?>(
@@ -49,8 +44,7 @@ class _SettingsState extends ConsumerState<Settings> {
                 groupValue: themeMode,
                 title: Strings.light,
                 onChanged: (_) async {
-                  storage.setTheme(2);
-                  ref.read(themeProvider.notifier).state = Brightness.light;
+                  ref.read(themeProvider.notifier).setTheme(Brightness.light);
                 },
               ),
             ],
