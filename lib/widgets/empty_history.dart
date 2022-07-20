@@ -13,7 +13,7 @@ class EmptyHistory extends StatelessWidget {
         Icon(
           Icons.history_toggle_off_outlined,
           size: Styles.base * 30,
-          color: ArnaDynamicColor.resolve(ArnaColors.iconColor, context),
+          color: ArnaColors.iconColor.resolveFrom(context),
         ),
         Padding(
           padding: Styles.normal,

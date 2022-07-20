@@ -34,8 +34,9 @@ Future<void> translate(
       return;
     }
 
-    // ignore: avoid_dynamic_calls
-    final String? translation = json.decode(response.body)['translation'] as String?;
+    final String? translation =
+        // ignore: avoid_dynamic_calls
+        json.decode(response.body)['translation'] as String?;
 
     if (translation == null) {
       showArnaSnackbar(

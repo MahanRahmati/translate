@@ -43,5 +43,8 @@ class HistoryAdapter extends TypeAdapter<History> {
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) || other is HistoryAdapter && runtimeType == other.runtimeType && typeId == other.typeId;
+      identical(this, other) ||
+      other is HistoryAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
 }

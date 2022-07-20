@@ -20,7 +20,11 @@ class AboutButton extends ConsumerWidget {
         applicationName: Strings.appName,
         developerName: 'Mahan Rahmati',
         applicationVersion: Strings.version,
-        applicationUri: Uri(scheme: 'https', host: 'github.com', path: 'MahanRahmati/translate/issues'),
+        applicationUri: Uri(
+          scheme: 'https',
+          host: 'github.com',
+          path: 'MahanRahmati/translate/issues',
+        ),
       ),
       tooltipMessage: Strings.about,
     );

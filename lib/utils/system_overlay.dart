@@ -16,7 +16,9 @@ void updateSystemUIOverlayStyle(BuildContext context) {
   }
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(
-      systemNavigationBarColor: ArnaDynamicColor.resolve(ArnaColors.backgroundColor, context),
+      systemNavigationBarColor: ArnaColors.backgroundColor.resolveFrom(
+        context,
+      ),
       systemNavigationBarIconBrightness: systemNavigationBarIconBrightness,
       systemNavigationBarDividerColor: ArnaColors.transparent,
     ),

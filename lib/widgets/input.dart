@@ -24,7 +24,11 @@ class _InputWidgetState extends ConsumerState<InputWidget> {
       padding: Styles.small,
       child: ArnaTextField(
         controller: widget.controller,
-        onSubmitted: (String text) => translate(context, widget.controller.text, ref),
+        onSubmitted: (String text) => translate(
+          context,
+          widget.controller.text,
+          ref,
+        ),
         onChanged: (String text) {
           if (text.isEmpty) {
             ref.read(outputProvider.notifier).state = '';

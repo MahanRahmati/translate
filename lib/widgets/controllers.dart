@@ -16,8 +16,8 @@ class ControllersWidget extends ConsumerWidget {
     final String targetKey = ref.watch(targetProvider);
     final String source = languages[sourceKey]!;
     final String target = languages[targetKey]!;
-    return Container(
-      color: ArnaDynamicColor.resolve(ArnaColors.headerColor, context),
+    return ColoredBox(
+      color: ArnaColors.headerColor.resolveFrom(context),
       child: Row(
         children: <Widget>[
           Expanded(
@@ -26,7 +26,9 @@ class ControllersWidget extends ConsumerWidget {
               onPressed: () => showArnaPopupDialog(
                 context: context,
                 title: Strings.source,
-                builder: (BuildContext context) => const Languages(source: true),
+                builder: (BuildContext context) => const Languages(
+                  source: true,
+                ),
               ),
               buttonSize: ButtonSize.huge,
             ),
@@ -38,7 +40,9 @@ class ControllersWidget extends ConsumerWidget {
               onPressed: () => showArnaPopupDialog(
                 context: context,
                 title: Strings.target,
-                builder: (BuildContext context) => const Languages(source: false),
+                builder: (BuildContext context) => const Languages(
+                  source: false,
+                ),
               ),
               buttonSize: ButtonSize.huge,
             ),

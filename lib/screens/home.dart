@@ -34,7 +34,8 @@ class _HomeState extends ConsumerState<Home> {
     );
     return ArnaScaffold(
       title: Strings.appName,
-      headerBarMiddle: ArnaHelpers.isExpanded(context) ? const ControllersButtons() : null,
+      headerBarMiddle:
+          ArnaHelpers.isExpanded(context) ? const ControllersButtons() : null,
       actions: const <Widget>[
         HistoryButton(),
         SettingsButton(),

@@ -11,7 +11,8 @@ class ControllersButtons extends ConsumerStatefulWidget {
   const ControllersButtons({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _ControllersButtonsState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _ControllersButtonsState();
 }
 
 class _ControllersButtonsState extends ConsumerState<ControllersButtons> {
