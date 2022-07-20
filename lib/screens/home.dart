@@ -40,6 +40,8 @@ class _HomeState extends ConsumerState<Home> {
         HistoryButton(),
         SettingsButton(),
       ],
+      headerBarBottom:
+          ArnaHelpers.isExpanded(context) ? null : const ControllersWidget(),
       body: ArnaBody(
         expanded: Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -56,8 +58,6 @@ class _HomeState extends ConsumerState<Home> {
         ),
         compact: Column(
           children: <Widget>[
-            const ControllersWidget(),
-            const ArnaDivider(),
             Expanded(
               child: input,
             ),
