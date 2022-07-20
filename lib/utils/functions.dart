@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
 import '/db/history_db.dart';
+import '/models/translation.dart';
 import '/providers.dart';
 import '/strings.dart';
 
@@ -34,11 +35,13 @@ Future<void> translate(
       return;
     }
 
-    final String? translation =
-        // ignore: avoid_dynamic_calls
-        json.decode(response.body)['translation'] as String?;
+    final Translation translation = Translation.fromJson(
+      json: json.decode(response.body) as Map<String, dynamic>,
+    );
 
-    if (translation == null) {
+    final String? translationText = translation.translation;
+
+    if (translationText == null) {
       showArnaSnackbar(
         context: context,
         message: Strings.error,
@@ -47,8 +50,8 @@ Future<void> translate(
       return;
     }
 
-    HistoryDB.instance.add(query, translation);
-    ref.watch(outputProvider.notifier).state = translation; // TODO(fix)
+    HistoryDB.instance.add(query, translationText);
+    ref.watch(outputProvider.notifier).state = translationText; // TODO(fix)
   } catch (e) {
     debugPrint(e.toString());
   }
