@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '/providers.dart';
 import '/strings.dart';
 import '/utils/debouncer.dart';
-import '/utils/functions.dart';
 
 class InputWidget extends ConsumerStatefulWidget {
   const InputWidget({
@@ -30,10 +29,10 @@ class _InputWidgetState extends ConsumerState<InputWidget> {
 
   void onChanged(String text) {
     if (text.isEmpty) {
-      ref.read(outputProvider.notifier).state = '';
+      ref.read(inputProvider.notifier).state = text;
+    } else {
+      _debouncer.run(() => ref.read(inputProvider.notifier).state = text);
     }
-    ref.read(inputProvider.notifier).state = text;
-    _debouncer.run(() => translate(context, ref));
   }
 
   @override

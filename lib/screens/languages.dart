@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '/providers.dart';
 import '/strings.dart';
-import '/utils/functions.dart';
 import '/utils/languages.dart';
 import '/utils/storage.dart';
 
@@ -92,13 +91,9 @@ class _LanguagesState extends ConsumerState<Languages> {
             if (widget.source && key != sourceKey) {
               storage.setSource(value!);
               ref.read(sourceProvider.notifier).state = value;
-              translate(context, ref);
-              //print(value + targetKey);
             } else if (key != targetKey) {
               storage.setTarget(value!);
               ref.read(targetProvider.notifier).state = value;
-              translate(context, ref);
-              //print(sourceKey + value);
             }
             Navigator.pop(context);
           },
