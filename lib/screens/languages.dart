@@ -22,7 +22,8 @@ class _LanguagesState extends ConsumerState<Languages> {
   final SharedStorage storage = SharedStorage.instance;
   TextEditingController controller = TextEditingController();
   final List<ArnaRadioListTile<String>> list = <ArnaRadioListTile<String>>[];
-  final List<ArnaRadioListTile<String>> filteredList = <ArnaRadioListTile<String>>[];
+  final List<ArnaRadioListTile<String>> filteredList =
+      <ArnaRadioListTile<String>>[];
   bool queryIsEmpty = true;
 
   Future<void> search(String query, String groupValue) async {
@@ -62,9 +63,13 @@ class _LanguagesState extends ConsumerState<Languages> {
 
   @override
   Widget build(BuildContext context) {
-    final String groupValue = widget.source ? ref.watch(sourceProvider) : ref.watch(targetProvider);
+    final String groupValue =
+        widget.source ? ref.watch(sourceProvider) : ref.watch(targetProvider);
     if (queryIsEmpty) {
       languages.forEach((String key, String value) {
+        if (key == 'auto' && !widget.source) {
+          return;
+        }
         final ArnaRadioListTile<String> item = ArnaRadioListTile<String>(
           value: key,
           groupValue: groupValue,
