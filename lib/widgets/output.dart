@@ -1,6 +1,7 @@
 import 'package:arna/arna.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '/models/translation.dart';
 import '/providers.dart';
 import '/strings.dart';
 
@@ -9,51 +10,79 @@ class OutputWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final String? outputText = ref.watch(outputProvider);
+    final AsyncValue<Translation?> translation = ref.watch(outputProvider);
+
     return ArnaCard(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Expanded(
-            child: outputText == null
-                ? const Center(child: ArnaProgressIndicator())
-                : Padding(
-                    padding: Styles.normal,
-                    child: outputText.isEmpty
-                        ? Text(
-                            Strings.translation,
-                            style:
-                                ArnaTheme.of(context).textTheme.body!.copyWith(
+      child: translation.when(
+        loading: () => const Center(child: ArnaProgressIndicator()),
+        error: (Object err, StackTrace? stack) => Text('Error: $err'),
+        data: (Translation? t) {
+          return t != null
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Expanded(
+                      child: Padding(
+                        padding: Styles.normal,
+                        child: t.translation!.isEmpty
+                            ? Text(
+                                Strings.translation,
+                                style: ArnaTheme.of(context)
+                                    .textTheme
+                                    .body!
+                                    .copyWith(
                                       color: ArnaColors.secondaryTextColor
                                           .resolveFrom(context),
                                     ),
-                          )
-                        : ArnaSelectableText(
-                            outputText,
-                            style: ArnaTheme.of(context).textTheme.body,
-                          ),
-                  ),
-          ),
-          const ArnaDivider(),
-          Row(
-            children: <Widget>[
-              const Spacer(),
-              ArnaIconButton(
-                icon: Icons.copy_outlined,
-                onPressed: outputText != null && outputText.isNotEmpty
-                    ? () {
-                        ArnaHelpers.copyToClipboard(outputText);
-                        showArnaSnackbar(
-                          context: context,
-                          message: Strings.copyToast,
-                        );
-                      }
-                    : null,
-                tooltipMessage: Strings.copy,
-              ),
-            ],
-          ),
-        ],
+                              )
+                            : ArnaSelectableText(
+                                t.translation!,
+                                style: ArnaTheme.of(context).textTheme.body,
+                              ),
+                      ),
+                    ),
+                    const ArnaDivider(),
+                    Row(
+                      children: <Widget>[
+                        const Spacer(),
+                        ArnaIconButton(
+                          icon: Icons.copy_outlined,
+                          onPressed: (t.translation!) != null &&
+                                  t.translation!.isNotEmpty
+                              ? () {
+                                  ArnaHelpers.copyToClipboard(
+                                    t.translation!,
+                                  );
+                                  showArnaSnackbar(
+                                    context: context,
+                                    message: Strings.copyToast,
+                                  );
+                                }
+                              : null,
+                          tooltipMessage: Strings.copy,
+                        ),
+                      ],
+                    ),
+                  ],
+                )
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    Expanded(
+                      child: Padding(
+                        padding: Styles.normal,
+                        child: Text(
+                          Strings.translation,
+                          style: ArnaTheme.of(context).textTheme.body!.copyWith(
+                                color: ArnaColors.secondaryTextColor
+                                    .resolveFrom(context),
+                              ),
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+        },
       ),
     );
   }
