@@ -67,7 +67,7 @@ jobs:
     steps:
       # Set up Flutter.
       - name: Clone Flutter repository with master channel
-        uses: subosito/flutter-action@v2.4.0
+        uses: subosito/flutter-action@v2.5.0
         with:
           channel: "stable" # 'dev', 'alpha', default to: 'stable'
           # flutter-version: '1.12.x' # you can also specify exact version of flutter
