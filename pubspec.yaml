@@ -11,6 +11,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   arna:
     git: https://github.com/MahanRahmati/Arna.git
   flutter_riverpod: ^2.0.0-dev.9
@@ -30,6 +32,7 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  generate: true
 
   assets:
     - assets/images/

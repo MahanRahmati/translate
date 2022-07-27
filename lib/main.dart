@@ -1,4 +1,5 @@
 import 'package:arna/arna.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -27,6 +28,8 @@ class MyApp extends ConsumerWidget {
         brightness: ref.watch(themeProvider),
         accentColor: const Color(0xFF2EC27E),
       ),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       home: const Home(),
     );
   }
