@@ -1,0 +1,98 @@
+{
+  "about": "About",
+  "@about": {
+    "description": "About"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings"
+  },
+  "theme": "Theme",
+  "@theme": {
+    "description": "Theme"
+  },
+  "system": "System",
+  "@system": {
+    "description": "System"
+  },
+  "dark": "Dark",
+  "@dark": {
+    "description": "Dark"
+  },
+  "light": "Light",
+  "@light": {
+    "description": "Light"
+  },
+  "text": "Text",
+  "@text": {
+    "description": "Text"
+  },
+  "translation": "Translation",
+  "@translation": {
+    "description": "Translation"
+  },
+  "source": "Source language",
+  "@source": {
+    "description": "Source language"
+  },
+  "target": "Target language",
+  "@target": {
+    "description": "Target language"
+  },
+  "languages": "Languages",
+  "@languages": {
+    "description": "Languages"
+  },
+  "swap": "Swap",
+  "@swap": {
+    "description": "Swap"
+  },
+  "copy": "Copy to clipboard",
+  "@copy": {
+    "description": "Copy to clipboard"
+  },
+  "search": "Search...",
+  "@search": {
+    "description": "Search..."
+  },
+  "history": "History",
+  "@history": {
+    "description": "History"
+  },
+  "deleteAll": "Delete all",
+  "@deleteAll": {
+    "description": "Delete all"
+  },
+  "deleteTitle": "Are you sure you want to clear history?",
+  "@deleteTitle": {
+    "description": "Are you sure you want to clear history?"
+  },
+  "deleteDescription": "You can't undo this action.",
+  "@deleteDescription": {
+    "description": "You can't undo this action."
+  },
+  "clear": "Clear History",
+  "@clear": {
+    "description": "Clear History"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Cancel"
+  },
+  "emptyHistory": "No History",
+  "@emptyHistory": {
+    "description": "No History"
+  },
+  "emptyHistoryDescription": "Your history will appear here.",
+  "@emptyHistoryDescription": {
+    "description": "Your history will appear here."
+  },
+  "error": "Something went wrong!",
+  "@error": {
+    "description": "Something went wrong!"
+  },
+  "copyToast": "Copied to clipboard.",
+  "@copyToast": {
+    "description": "Copied to clipboard."
+  }
+}

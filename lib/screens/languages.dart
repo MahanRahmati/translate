@@ -117,7 +117,7 @@ class _LanguagesState extends ConsumerState<Languages> {
             child: Column(
               children: <Widget>[
                 ArnaList(
-                  title: Strings.language,
+                  title: Strings.languages,
                   showDividers: true,
                   showBackground: true,
                   children: filteredList,
