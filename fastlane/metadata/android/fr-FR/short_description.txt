@@ -1,0 +1,1 @@
+Interface alternative pour Google Traduction qui respecte votre vie privée.
