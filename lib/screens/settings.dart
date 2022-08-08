@@ -4,16 +4,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '/providers/theme.dart';
 import '/strings.dart';
 
-class Settings extends ConsumerStatefulWidget {
+class Settings extends ConsumerWidget {
   const Settings({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _SettingsState();
-}
-
-class _SettingsState extends ConsumerState<Settings> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final Brightness? themeMode = ref.watch(themeProvider);
     return SingleChildScrollView(
       child: Column(
@@ -27,7 +22,7 @@ class _SettingsState extends ConsumerState<Settings> {
                 value: null,
                 groupValue: themeMode,
                 title: Strings.system,
-                onChanged: (_) async {
+                onChanged: (_) {
                   ref.read(themeProvider.notifier).setTheme(null);
                 },
               ),
@@ -35,7 +30,7 @@ class _SettingsState extends ConsumerState<Settings> {
                 value: Brightness.dark,
                 groupValue: themeMode,
                 title: Strings.dark,
-                onChanged: (_) async {
+                onChanged: (_) {
                   ref.read(themeProvider.notifier).setTheme(Brightness.dark);
                 },
               ),
@@ -43,7 +38,7 @@ class _SettingsState extends ConsumerState<Settings> {
                 value: Brightness.light,
                 groupValue: themeMode,
                 title: Strings.light,
-                onChanged: (_) async {
+                onChanged: (_) {
                   ref.read(themeProvider.notifier).setTheme(Brightness.light);
                 },
               ),
