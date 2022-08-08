@@ -4,7 +4,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 import '/db/history_db.dart';
 import '/models/history.dart';
-import '/providers/input_provider.dart';
 import '/providers/source_provider.dart';
 import '/providers/target_provider.dart';
 import '/screens/settings.dart';
@@ -118,9 +117,7 @@ class _HomeState extends ConsumerState<Home> {
     updateSystemUIOverlayStyle(context);
     final bool isExpanded = ArnaHelpers.isExpanded(context);
 
-    final Widget input = InputWidget(
-      input: ref.read(inputProvider),
-    );
+    const Widget input = InputWidget();
 
     final Widget expanded = Row(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -137,9 +134,9 @@ class _HomeState extends ConsumerState<Home> {
     );
 
     final Widget compact = Column(
-      children: <Widget>[
+      children: const <Widget>[
         Expanded(child: input),
-        const Expanded(
+        Expanded(
           child: SafeArea(
             top: false,
             child: OutputWidget(),
