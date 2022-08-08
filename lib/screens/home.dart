@@ -44,7 +44,7 @@ class _HomeState extends ConsumerState<Home> {
   void onHistoryPressed() {
     showArnaPopupDialog(
       context: context,
-      title: Strings.history,
+      title: context.localizations.history,
       actions: <Widget>[
         ArnaIconButton(
           icon: Icons.delete_outlined,
@@ -52,20 +52,20 @@ class _HomeState extends ConsumerState<Home> {
             context: context,
             builder: (BuildContext context) {
               return ArnaAlertDialog(
-                title: Strings.deleteTitle,
+                title: context.localizations.deleteTitle,
                 content: Text(
-                  Strings.deleteDescription,
+                  context.localizations.deleteDescription,
                   style: ArnaTheme.of(context).textTheme.subtitle,
                   textAlign: TextAlign.center,
                 ),
                 actions: <Widget>[
                   ArnaTextButton(
-                    label: Strings.clear,
+                    label: context.localizations.clear,
                     onPressed: () => Navigator.pop(context, true),
                     buttonType: ButtonType.destructive,
                   ),
                   ArnaTextButton(
-                    label: Strings.cancel,
+                    label: context.localizations.cancel,
                     onPressed: () => Navigator.pop(context),
                   ),
                 ],
@@ -79,7 +79,7 @@ class _HomeState extends ConsumerState<Home> {
               }
             }
           }),
-          tooltipMessage: Strings.deleteAll,
+          tooltipMessage: context.localizations.deleteAll,
         ),
       ],
       builder: (BuildContext context) => const HistoryList(),
@@ -89,7 +89,7 @@ class _HomeState extends ConsumerState<Home> {
   void onSettingsPressed() {
     showArnaPopupDialog(
       context: context,
-      title: Strings.settings,
+      title: context.localizations.settings,
       builder: (BuildContext context) => const Settings(),
     );
   }
@@ -157,16 +157,16 @@ class _HomeState extends ConsumerState<Home> {
             ArnaPopupMenuItem<int>(
               enabled: historyDB.isNotEmpty,
               value: 0,
-              child: const Text(Strings.history),
+              child: Text(context.localizations.history),
             ),
             const ArnaPopupMenuDivider(),
-            const ArnaPopupMenuItem<int>(
+            ArnaPopupMenuItem<int>(
               value: 1,
-              child: Text(Strings.settings),
+              child: Text(context.localizations.settings),
             ),
-            const ArnaPopupMenuItem<int>(
+            ArnaPopupMenuItem<int>(
               value: 2,
-              child: Text(Strings.about),
+              child: Text(context.localizations.about),
             ),
           ],
           onSelected: (int index) {

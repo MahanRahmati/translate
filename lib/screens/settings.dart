@@ -14,14 +14,14 @@ class Settings extends ConsumerWidget {
       child: Column(
         children: <Widget>[
           ArnaList(
-            title: Strings.theme,
+            title: context.localizations.theme,
             showDividers: true,
             showBackground: true,
             children: <Widget>[
               ArnaRadioListTile<Brightness?>(
                 value: null,
                 groupValue: themeMode,
-                title: Strings.system,
+                title: context.localizations.system,
                 onChanged: (_) {
                   ref.read(themeProvider.notifier).setTheme(null);
                 },
@@ -29,7 +29,7 @@ class Settings extends ConsumerWidget {
               ArnaRadioListTile<Brightness?>(
                 value: Brightness.dark,
                 groupValue: themeMode,
-                title: Strings.dark,
+                title: context.localizations.dark,
                 onChanged: (_) {
                   ref.read(themeProvider.notifier).setTheme(Brightness.dark);
                 },
@@ -37,7 +37,7 @@ class Settings extends ConsumerWidget {
               ArnaRadioListTile<Brightness?>(
                 value: Brightness.light,
                 groupValue: themeMode,
-                title: Strings.light,
+                title: context.localizations.light,
                 onChanged: (_) {
                   ref.read(themeProvider.notifier).setTheme(Brightness.light);
                 },

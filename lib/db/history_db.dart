@@ -2,7 +2,6 @@ import 'package:hive/hive.dart';
 import 'package:uuid/uuid.dart';
 
 import '/models/history.dart';
-import '/strings.dart';
 
 class HistoryDB {
   HistoryDB._();
@@ -10,8 +9,9 @@ class HistoryDB {
   static final HistoryDB instance = HistoryDB._();
 
   late Box<History> historyDB;
+
   Future<void> initialize() async {
-    historyDB = await Hive.openBox<History>(Strings.historyBox);
+    historyDB = await Hive.openBox<History>('historyBox');
   }
 
   Future<void> add(String query, String translation) async {
@@ -25,7 +25,5 @@ class HistoryDB {
     await historyDB.add(history);
   }
 
-  void disposeDB() {
-    historyDB.close();
-  }
+  void disposeDB() => historyDB.close();
 }

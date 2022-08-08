@@ -79,14 +79,6 @@
   "@cancel": {
     "description": "Cancel"
   },
-  "emptyHistory": "No History",
-  "@emptyHistory": {
-    "description": "No History"
-  },
-  "emptyHistoryDescription": "Your history will appear here.",
-  "@emptyHistoryDescription": {
-    "description": "Your history will appear here."
-  },
   "error": "Something went wrong!",
   "@error": {
     "description": "Something went wrong!"

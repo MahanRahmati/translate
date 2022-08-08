@@ -19,7 +19,7 @@ class ControllersButtons extends ConsumerWidget {
   void onSourcePressed(BuildContext context) {
     showArnaPopupDialog(
       context: context,
-      title: Strings.source,
+      title: context.localizations.source,
       builder: (_) => const Languages(isSource: true),
     );
   }
@@ -37,7 +37,7 @@ class ControllersButtons extends ConsumerWidget {
   void onTargetPressed(BuildContext context) {
     showArnaPopupDialog(
       context: context,
-      title: Strings.target,
+      title: context.localizations.target,
       builder: (_) => const Languages(isSource: false),
     );
   }
@@ -60,7 +60,7 @@ class ControllersButtons extends ConsumerWidget {
                 onPressed: sourceKey != 'auto'
                     ? () => onSwapPressed(sourceKey, targetKey, ref)
                     : null,
-                tooltipMessage: Strings.swap,
+                tooltipMessage: context.localizations.swap,
               ),
               ArnaLinkedButton(
                 label: target,
@@ -82,7 +82,7 @@ class ControllersButtons extends ConsumerWidget {
                 onPressed: sourceKey != 'auto'
                     ? () => onSwapPressed(sourceKey, targetKey, ref)
                     : null,
-                tooltipMessage: Strings.swap,
+                tooltipMessage: context.localizations.swap,
               ),
               Expanded(
                 child: ArnaTextButton(

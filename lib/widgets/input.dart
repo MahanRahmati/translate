@@ -43,7 +43,7 @@ class _InputWidgetState extends ConsumerState<InputWidget> {
         controller: controller,
         onChanged: onChanged,
         clearButtonMode: ArnaOverlayVisibilityMode.editing,
-        hintText: Strings.text,
+        hintText: context.localizations.text,
         maxLength: 5000,
         maxLines: null,
         textAlignVertical: TextAlignVertical.top,
