@@ -9,97 +9,81 @@ import '/utils/storage.dart';
 class Languages extends ConsumerStatefulWidget {
   const Languages({
     super.key,
-    required this.source,
+    required this.isSource,
   });
 
-  final bool source;
+  final bool isSource;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _LanguagesState();
 }
 
 class _LanguagesState extends ConsumerState<Languages> {
-  final SharedStorage storage = SharedStorage.instance;
   TextEditingController controller = TextEditingController();
   final List<ArnaRadioListTile<String>> list = <ArnaRadioListTile<String>>[];
-  final List<ArnaRadioListTile<String>> filteredList =
-      <ArnaRadioListTile<String>>[];
-  bool queryIsEmpty = true;
+  late String sourceKey;
+  late String targetKey;
+  late String groupValue;
 
-  Future<void> search(String query, String sourceKey, String targetKey) async {
-    final String groupValue = widget.source ? sourceKey : targetKey;
-    if (query.isEmpty) {
-      queryIsEmpty = true;
-      filteredList.clear();
-      setState(() {});
-      return;
+  void addItem(String key) {
+    final ArnaRadioListTile<String> item = ArnaRadioListTile<String>(
+      value: key,
+      groupValue: groupValue,
+      title: languagesList[key]!,
+      onChanged: (String? value) async => setLanguage(key, value!),
+    );
+    list.add(item);
+  }
+
+  void setLanguage(String key, String value) {
+    final SharedStorage storage = SharedStorage.instance;
+    if (widget.isSource && key != sourceKey) {
+      storage.setSource(value);
+      ref.read(sourceProvider.notifier).state = value;
+    } else if (key != targetKey) {
+      storage.setTarget(value);
+      ref.read(targetProvider.notifier).state = value;
     }
-    if (query.isNotEmpty) {
-      queryIsEmpty = false;
-      filteredList.clear();
+    Navigator.pop(context);
+  }
+
+  void search(String query) {
+    if (query.isEmpty) {
+      list.clear();
+    } else {
+      list.clear();
       languagesList.forEach((String key, String value) {
-        // Not translating a language to itself
-        if ((key == sourceKey && !widget.source) ||
-            (key == targetKey && widget.source)) {
-          return;
+        if (key == 'auto' && !widget.isSource) {
+          return; // Target language can't be 'Auto'
+        }
+        if ((key == sourceKey && !widget.isSource) ||
+            (key == targetKey && widget.isSource)) {
+          return; // Not translating a language to itself
         }
         if (languagesList[key]!.toLowerCase().contains(query.toLowerCase())) {
-          filteredList.add(
-            ArnaRadioListTile<String>(
-              value: key,
-              groupValue: groupValue,
-              title: languagesList[key]!,
-              onChanged: (String? value) async {
-                if (widget.source) {
-                  storage.setSource(value!);
-                  ref.read(sourceProvider.notifier).state = value;
-                } else {
-                  storage.setTarget(value!);
-                  ref.read(targetProvider.notifier).state = value;
-                }
-                Navigator.pop(context);
-              },
-            ),
-          );
+          addItem(key);
         }
       });
-      setState(() {});
     }
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    final String sourceKey = ref.watch(sourceProvider);
-    final String targetKey = ref.watch(targetProvider);
-    final String groupValue = widget.source ? sourceKey : targetKey;
-    if (queryIsEmpty) {
+    sourceKey = ref.watch(sourceProvider);
+    targetKey = ref.watch(targetProvider);
+    groupValue = widget.isSource ? sourceKey : targetKey;
+
+    if (controller.text.isEmpty) {
       languagesList.forEach((String key, String value) {
-        // Target language can't be 'Auto'
-        if (key == 'auto' && !widget.source) {
-          return;
+        if (key == 'auto' && !widget.isSource) {
+          return; // Target language can't be 'Auto'
         }
-        // Not translating a language to itself
-        if ((key == sourceKey && !widget.source) ||
-            (key == targetKey && widget.source)) {
-          return;
+        if ((key == sourceKey && !widget.isSource) ||
+            (key == targetKey && widget.isSource)) {
+          return; // Not translating a language to itself
         }
-        final ArnaRadioListTile<String> item = ArnaRadioListTile<String>(
-          value: key,
-          groupValue: groupValue,
-          title: languagesList[key]!,
-          onChanged: (String? value) async {
-            if (widget.source && key != sourceKey) {
-              storage.setSource(value!);
-              ref.read(sourceProvider.notifier).state = value;
-            } else if (key != targetKey) {
-              storage.setTarget(value!);
-              ref.read(targetProvider.notifier).state = value;
-            }
-            Navigator.pop(context);
-          },
-        );
-        list.add(item);
-        filteredList.add(item);
+        addItem(key);
       });
     }
 
@@ -108,8 +92,9 @@ class _LanguagesState extends ConsumerState<Languages> {
         ArnaSearchField(
           showSearch: true,
           controller: controller,
-          onChanged: (String text) => search(text, sourceKey, targetKey),
+          onChanged: search,
           hintText: Strings.search,
+          autofocus: true,
         ),
         const ArnaDivider(),
         Expanded(
@@ -120,7 +105,7 @@ class _LanguagesState extends ConsumerState<Languages> {
                   title: Strings.languages,
                   showDividers: true,
                   showBackground: true,
-                  children: filteredList,
+                  children: list,
                 ),
               ],
             ),

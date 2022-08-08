@@ -19,7 +19,7 @@ class ControllersButtons extends ConsumerWidget {
     showArnaPopupDialog(
       context: context,
       title: Strings.source,
-      builder: (_) => const Languages(source: true),
+      builder: (_) => const Languages(isSource: true),
     );
   }
 
@@ -37,7 +37,7 @@ class ControllersButtons extends ConsumerWidget {
     showArnaPopupDialog(
       context: context,
       title: Strings.target,
-      builder: (_) => const Languages(source: false),
+      builder: (_) => const Languages(isSource: false),
     );
   }
 
