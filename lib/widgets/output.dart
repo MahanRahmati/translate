@@ -26,7 +26,7 @@ class OutputWidget extends ConsumerWidget {
                         padding: Styles.normal,
                         child: t.translation!.isEmpty
                             ? Text(
-                                Strings.translation,
+                                context.localizations.translation,
                                 style: ArnaTheme.of(context)
                                     .textTheme
                                     .body!
@@ -55,11 +55,11 @@ class OutputWidget extends ConsumerWidget {
                                   );
                                   showArnaSnackbar(
                                     context: context,
-                                    message: Strings.copyToast,
+                                    message: context.localizations.copyToast,
                                   );
                                 }
                               : null,
-                          tooltipMessage: Strings.copy,
+                          tooltipMessage: context.localizations.copy,
                         ),
                       ],
                     ),
@@ -72,7 +72,7 @@ class OutputWidget extends ConsumerWidget {
                       child: Padding(
                         padding: Styles.normal,
                         child: Text(
-                          Strings.translation,
+                          context.localizations.translation,
                           style: ArnaTheme.of(context).textTheme.body!.copyWith(
                                 color: ArnaColors.secondaryTextColor
                                     .resolveFrom(context),

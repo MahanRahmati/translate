@@ -1,98 +1,24 @@
 {
   "about": "À Propos",
-  "@about": {
-    "description": "About"
-  },
   "settings": "Paramètres",
-  "@settings": {
-    "description": "Settings"
-  },
   "theme": "Thème",
-  "@theme": {
-    "description": "Theme"
-  },
   "system": "Système",
-  "@system": {
-    "description": "System"
-  },
   "dark": "Sombre",
-  "@dark": {
-    "description": "Dark"
-  },
   "light": "Clair",
-  "@light": {
-    "description": "Light"
-  },
   "text": "Texte",
-  "@text": {
-    "description": "Text"
-  },
   "translation": "Traduction",
-  "@translation": {
-    "description": "Translation"
-  },
   "source": "Langue source",
-  "@source": {
-    "description": "Source language"
-  },
   "target": "Langue cible",
-  "@target": {
-    "description": "Target language"
-  },
   "languages": "Langues",
-  "@languages": {
-    "description": "Languages"
-  },
   "swap": "Échanger",
-  "@swap": {
-    "description": "Swap"
-  },
   "copy": "Copier dans le presse-papier",
-  "@copy": {
-    "description": "Copy to clipboard"
-  },
   "search": "Recherche...",
-  "@search": {
-    "description": "Search..."
-  },
   "history": "Historique",
-  "@history": {
-    "description": "History"
-  },
   "deleteAll": "Tout effacer",
-  "@deleteAll": {
-    "description": "Delete all"
-  },
   "deleteTitle": "Êtes-vous sûr de vouloir effacer l'historique?",
-  "@deleteTitle": {
-    "description": "Are you sure you want to clear history?"
-  },
   "deleteDescription": "Vous ne pouvez pas annuler cette action.",
-  "@deleteDescription": {
-    "description": "You can't undo this action."
-  },
   "clear": "Effacer l'historique",
-  "@clear": {
-    "description": "Clear History"
-  },
   "cancel": "Annuler",
-  "@cancel": {
-    "description": "Cancel"
-  },
-  "emptyHistory": "Aucun Historique",
-  "@emptyHistory": {
-    "description": "No History"
-  },
-  "emptyHistoryDescription": "Votre historique s'affichera ici.",
-  "@emptyHistoryDescription": {
-    "description": "Your history will appear here."
-  },
   "error": "Quelque chose s'est mal passé!",
-  "@error": {
-    "description": "Something went wrong!"
-  },
-  "copyToast": "Copié dans le presse-papier.",
-  "@copyToast": {
-    "description": "Copied to clipboard."
-  }
+  "copyToast": "Copié dans le presse-papier."
 }

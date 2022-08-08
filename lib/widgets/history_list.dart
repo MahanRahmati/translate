@@ -27,7 +27,7 @@ class HistoryList extends StatelessWidget {
                 child: Padding(
                   padding: Styles.normal,
                   child: Text(
-                    Strings.text,
+                    context.localizations.text,
                     style: ArnaTheme.of(context).textTheme.subtitle,
                   ),
                 ),
@@ -36,7 +36,7 @@ class HistoryList extends StatelessWidget {
                 child: Padding(
                   padding: Styles.normal,
                   child: Text(
-                    Strings.translation,
+                    context.localizations.translation,
                     style: ArnaTheme.of(context).textTheme.subtitle,
                   ),
                 ),
