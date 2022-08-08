@@ -3,22 +3,12 @@ import 'dart:convert';
 import 'package:arna/arna.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
-import 'package:translate/db/history_db.dart';
-import 'package:translate/models/translation.dart';
 
+import '/db/history_db.dart';
 import '/models/translation.dart';
-
-final StateProvider<String> sourceProvider = StateProvider<String>(
-  (StateProviderRef<String> ref) => 'auto',
-);
-
-final StateProvider<String> targetProvider = StateProvider<String>(
-  (StateProviderRef<String> ref) => 'en',
-);
-
-final StateProvider<String> inputProvider = StateProvider<String>(
-  (StateProviderRef<String> ref) => '',
-);
+import '/providers/input_provider.dart';
+import '/providers/source_provider.dart';
+import '/providers/target_provider.dart';
 
 final FutureProvider<Translation?> outputProvider =
     FutureProvider<Translation?>((FutureProviderRef<Translation?> ref) async {

@@ -2,7 +2,7 @@ import 'package:arna/arna.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '/models/translation.dart';
-import '/providers.dart';
+import '/providers/output_provider.dart';
 import '/strings.dart';
 
 class OutputWidget extends ConsumerWidget {

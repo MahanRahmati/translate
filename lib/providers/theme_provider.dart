@@ -16,22 +16,31 @@ class ThemeNotifier extends StateNotifier<Brightness?> {
   void _initializeTheme() {
     final SharedStorage storage = SharedStorage.instance;
     final String? theme = storage.theme;
-    state = null;
-    if (theme == 'dark') {
-      state = Brightness.dark;
-    } else if (theme == 'light') {
-      state = Brightness.light;
+    switch (theme) {
+      case 'dark':
+        state = Brightness.dark;
+        break;
+      case 'light':
+        state = Brightness.light;
+        break;
+      default:
+        state = null;
+        break;
     }
   }
 
   void setTheme(Brightness? brightness) {
     final SharedStorage storage = SharedStorage.instance;
-    if (brightness == null) {
-      storage.setTheme('system');
-    } else if (brightness == Brightness.dark) {
-      storage.setTheme('dark');
-    } else if (brightness == Brightness.light) {
-      storage.setTheme('light');
+    switch (brightness) {
+      case Brightness.dark:
+        storage.setTheme('dark');
+        break;
+      case Brightness.light:
+        storage.setTheme('light');
+        break;
+      case null:
+        storage.setTheme('system');
+        break;
     }
     state = brightness;
   }

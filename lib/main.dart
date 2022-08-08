@@ -2,7 +2,7 @@ import 'package:arna/arna.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '/providers/theme.dart';
+import '/providers/theme_provider.dart';
 import '/screens/home.dart';
 import '/utils/hive.dart';
 import '/utils/storage.dart';

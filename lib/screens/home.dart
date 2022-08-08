@@ -4,7 +4,9 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 import '/db/history_db.dart';
 import '/models/history.dart';
-import '/providers.dart';
+import '/providers/input_provider.dart';
+import '/providers/source_provider.dart';
+import '/providers/target_provider.dart';
 import '/screens/settings.dart';
 import '/strings.dart';
 import '/utils/storage.dart';
