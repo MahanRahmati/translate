@@ -1,7 +1,8 @@
 import 'package:arna/arna.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '/providers.dart';
+import '/providers/source_provider.dart';
+import '/providers/target_provider.dart';
 import '/screens/languages.dart';
 import '/strings.dart';
 import '/utils/languages.dart';

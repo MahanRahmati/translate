@@ -1,7 +1,7 @@
 import 'package:arna/arna.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '/providers.dart';
+import '/providers/input_provider.dart';
 import '/strings.dart';
 import '/utils/debouncer.dart';
 

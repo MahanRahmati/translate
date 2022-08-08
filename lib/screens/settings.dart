@@ -1,7 +1,7 @@
 import 'package:arna/arna.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '/providers/theme.dart';
+import '/providers/theme_provider.dart';
 import '/strings.dart';
 
 class Settings extends ConsumerWidget {
