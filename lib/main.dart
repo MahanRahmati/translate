@@ -1,7 +1,6 @@
 import 'package:arna/arna.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 import '/providers/theme.dart';
 import '/screens/home.dart';
@@ -10,9 +9,7 @@ import '/utils/storage.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Hive.initFlutter();
-  registerHiveAdapters();
-  await initializeDBs();
+  await initializeHive();
   await SharedStorage.instance.initialize();
   runApp(const ProviderScope(child: MyApp()));
 }

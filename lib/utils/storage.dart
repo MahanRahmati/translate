@@ -12,17 +12,11 @@ class SharedStorage {
   }
 
   String? get theme => _storage.getString('theme');
-  void setTheme(final String theme) {
-    _storage.setString('theme', theme);
-  }
+  void setTheme(final String theme) => _storage.setString('theme', theme);
 
   String? get source => _storage.getString('source');
-  void setSource(final String source) {
-    _storage.setString('source', source);
-  }
+  void setSource(final String source) => _storage.setString('source', source);
 
   String? get target => _storage.getString('target');
-  void setTarget(final String target) {
-    _storage.setString('target', target);
-  }
+  void setTarget(final String target) => _storage.setString('target', target);
 }

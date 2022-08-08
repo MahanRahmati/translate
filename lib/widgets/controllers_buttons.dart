@@ -45,8 +45,8 @@ class ControllersButtons extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final String sourceKey = ref.watch(sourceProvider);
     final String targetKey = ref.watch(targetProvider);
-    final String source = languages[sourceKey]!;
-    final String target = languages[targetKey]!;
+    final String source = languagesList[sourceKey]!;
+    final String target = languagesList[targetKey]!;
     return top
         ? ArnaLinkedButtons(
             buttons: <ArnaLinkedButton>[
