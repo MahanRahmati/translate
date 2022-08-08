@@ -23,6 +23,8 @@ class Home extends ConsumerStatefulWidget {
 }
 
 class _HomeState extends ConsumerState<Home> {
+  final Box<History> historyDB = HistoryDB.instance.historyDB;
+
   @override
   void initState() {
     final SharedStorage storage = SharedStorage.instance;
@@ -39,48 +41,44 @@ class _HomeState extends ConsumerState<Home> {
   }
 
   void onHistoryPressed() {
-    final Box<History> historyDB = HistoryDB.instance.historyDB;
     showArnaPopupDialog(
       context: context,
       title: Strings.history,
       actions: <Widget>[
         ArnaIconButton(
           icon: Icons.delete_outlined,
-          onPressed: historyDB.isNotEmpty
-              ? () => showArnaDialog<bool>(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return ArnaAlertDialog(
-                        title: Strings.deleteTitle,
-                        content: Text(
-                          Strings.deleteDescription,
-                          style: ArnaTheme.of(context).textTheme.subtitle,
-                          textAlign: TextAlign.center,
-                        ),
-                        actions: <Widget>[
-                          ArnaTextButton(
-                            label: Strings.clear,
-                            onPressed: () => Navigator.pop(context, true),
-                            buttonType: ButtonType.destructive,
-                          ),
-                          ArnaTextButton(
-                            label: Strings.cancel,
-                            onPressed: () => Navigator.pop(context),
-                          ),
-                        ],
-                      );
-                    },
-                  ).then((bool? value) async {
-                    if (value != null) {
-                      if (value) {
-                        historyDB.clear();
-                        Navigator.pop(context);
-                      }
-                    }
-                  })
-              : null,
+          onPressed: () => showArnaDialog<bool>(
+            context: context,
+            builder: (BuildContext context) {
+              return ArnaAlertDialog(
+                title: Strings.deleteTitle,
+                content: Text(
+                  Strings.deleteDescription,
+                  style: ArnaTheme.of(context).textTheme.subtitle,
+                  textAlign: TextAlign.center,
+                ),
+                actions: <Widget>[
+                  ArnaTextButton(
+                    label: Strings.clear,
+                    onPressed: () => Navigator.pop(context, true),
+                    buttonType: ButtonType.destructive,
+                  ),
+                  ArnaTextButton(
+                    label: Strings.cancel,
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                ],
+              );
+            },
+          ).then((bool? value) async {
+            if (value != null) {
+              if (value) {
+                historyDB.clear();
+                Navigator.pop(context);
+              }
+            }
+          }),
           tooltipMessage: Strings.deleteAll,
-          buttonType: ButtonType.destructive,
         ),
       ],
       builder: (BuildContext context) => const HistoryList(),
@@ -155,9 +153,10 @@ class _HomeState extends ConsumerState<Home> {
       actions: <Widget>[
         ArnaPopupMenuButton<int>(
           itemBuilder: (BuildContext context) => <ArnaPopupMenuEntry<int>>[
-            const ArnaPopupMenuItem<int>(
+            ArnaPopupMenuItem<int>(
+              enabled: historyDB.isNotEmpty,
               value: 0,
-              child: Text(Strings.history),
+              child: const Text(Strings.history),
             ),
             const ArnaPopupMenuDivider(),
             const ArnaPopupMenuItem<int>(
