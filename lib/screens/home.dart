@@ -9,7 +9,6 @@ import '/screens/settings.dart';
 import '/strings.dart';
 import '/utils/storage.dart';
 import '/utils/system_overlay.dart';
-import '/widgets/controllers.dart';
 import '/widgets/controllers_buttons.dart';
 import '/widgets/history_list.dart';
 import '/widgets/input.dart';
@@ -149,7 +148,7 @@ class _HomeState extends ConsumerState<Home> {
 
     return ArnaScaffold(
       title: Strings.appName,
-      headerBarMiddle: isExpanded ? const ControllersButtons() : null,
+      headerBarMiddle: isExpanded ? const ControllersButtons(top: true) : null,
       actions: <Widget>[
         ArnaPopupMenuButton<int>(
           itemBuilder: (BuildContext context) => <ArnaPopupMenuEntry<int>>[
@@ -183,7 +182,7 @@ class _HomeState extends ConsumerState<Home> {
           },
         ),
       ],
-      headerBarBottom: isExpanded ? null : const ControllersWidget(),
+      headerBarBottom: isExpanded ? null : const ControllersButtons(top: false),
       body: ArnaBody(
         expanded: expanded,
         compact: compact,
