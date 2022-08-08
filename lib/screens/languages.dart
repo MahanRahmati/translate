@@ -37,18 +37,18 @@ class _LanguagesState extends ConsumerState<Languages> {
     if (query.isNotEmpty) {
       queryIsEmpty = false;
       filteredList.clear();
-      languages.forEach((String key, String value) {
+      languagesList.forEach((String key, String value) {
         // Not translating a language to itself
         if ((key == sourceKey && !widget.source) ||
             (key == targetKey && widget.source)) {
           return;
         }
-        if (languages[key]!.toLowerCase().contains(query.toLowerCase())) {
+        if (languagesList[key]!.toLowerCase().contains(query.toLowerCase())) {
           filteredList.add(
             ArnaRadioListTile<String>(
               value: key,
               groupValue: groupValue,
-              title: languages[key]!,
+              title: languagesList[key]!,
               onChanged: (String? value) async {
                 if (widget.source) {
                   storage.setSource(value!);
@@ -73,7 +73,7 @@ class _LanguagesState extends ConsumerState<Languages> {
     final String targetKey = ref.watch(targetProvider);
     final String groupValue = widget.source ? sourceKey : targetKey;
     if (queryIsEmpty) {
-      languages.forEach((String key, String value) {
+      languagesList.forEach((String key, String value) {
         // Target language can't be 'Auto'
         if (key == 'auto' && !widget.source) {
           return;
@@ -86,7 +86,7 @@ class _LanguagesState extends ConsumerState<Languages> {
         final ArnaRadioListTile<String> item = ArnaRadioListTile<String>(
           value: key,
           groupValue: groupValue,
-          title: languages[key]!,
+          title: languagesList[key]!,
           onChanged: (String? value) async {
             if (widget.source && key != sourceKey) {
               storage.setSource(value!);

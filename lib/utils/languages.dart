@@ -1,4 +1,4 @@
-const Map<String, String> languages = <String, String>{
+const Map<String, String> languagesList = <String, String>{
   'auto': 'Detect',
   'af': 'Afrikaans',
   'sq': 'Albanian',

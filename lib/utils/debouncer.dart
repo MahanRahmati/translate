@@ -3,13 +3,9 @@ import 'dart:async';
 import 'package:arna/arna.dart';
 
 class Debouncer {
-  Debouncer({
-    required this.milliseconds,
-    this.action,
-  });
+  Debouncer({required this.milliseconds});
 
   final int milliseconds;
-  VoidCallback? action;
   Timer? _timer;
 
   void run(VoidCallback action) {
