@@ -1,0 +1,3 @@
+<i>Arna Translate</i> è un front-end alternativo per Google Traduttore, che funge da traduttore gratuito e open source con oltre cento lingue disponibili.
+
+<i>Arna Translate</i> usa le API di Lingva Translate. Ispirato da progetti come NewPipe, Nitter, Invidious o Bibliogram, Lingva esegue uno scraping da Google Traduttore e recupera la traduzione senza utilizzare alcun servizio legato a Google, impedendo di tracciarti. Per ulteriori informazioni su Lingva Translate, <a href='https://github.com/thedaviddelta/lingva-translate' target='_blank' rel='nofollow'>clicca qui</a>.
