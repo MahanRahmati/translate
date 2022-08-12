@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
@@ -39,11 +37,7 @@ class OutputNotifier extends StateNotifier<AsyncValue<Translation?>> {
     final http.Response response = await http.get(
       Uri.https('lingva.ml', '/api/v1/$sourceKey/$targetKey/$query'),
     );
-
-    translation = Translation.fromJson(
-      json: json.decode(response.body) as Map<String, dynamic>,
-    );
-
+    translation = Translation.fromRawJson(response.body);
     if (translation.translation != null) {
       HistoryDB.instance.add(query, translation.translation!);
     }
