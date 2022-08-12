@@ -11,33 +11,50 @@ class OutputWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final Translation? translation = ref.watch(outputProvider);
+    final AsyncValue<Translation?> translation = ref.watch(outputProvider);
     return ArnaCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Expanded(
-            child: Padding(
-              padding: Styles.normal,
-              child: translation != null
-                  ? ArnaSelectableText(
-                      translation.translation!,
-                      style: ArnaTheme.of(context).textTheme.body,
-                    )
-                  : Text(
-                      context.localizations.translation,
-                      style: ArnaTheme.of(context).textTheme.body!.copyWith(
-                            color: ArnaColors.secondaryTextColor
-                                .resolveFrom(context),
-                          ),
-                    ),
+            child: translation.when(
+              loading: () => const Center(child: ArnaProgressIndicator()),
+              error: (Object err, StackTrace? stack) {
+                return Padding(
+                  padding: Styles.normal,
+                  child: Text(
+                    context.localizations.error,
+                    style: ArnaTheme.of(context).textTheme.body!.copyWith(
+                          color: ArnaColors.secondaryTextColor
+                              .resolveFrom(context),
+                        ),
+                  ),
+                );
+              },
+              data: (Translation? t) {
+                return Padding(
+                  padding: Styles.normal,
+                  child: t != null
+                      ? ArnaSelectableText(
+                          t.translation!,
+                          style: ArnaTheme.of(context).textTheme.body,
+                        )
+                      : Text(
+                          context.localizations.translation,
+                          style: ArnaTheme.of(context).textTheme.body!.copyWith(
+                                color: ArnaColors.secondaryTextColor
+                                    .resolveFrom(context),
+                              ),
+                        ),
+                );
+              },
             ),
           ),
           const ArnaDivider(),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
-              CopyButton(translation: translation?.translation),
+              CopyButton(translation: translation.value?.translation),
             ],
           ),
         ],
