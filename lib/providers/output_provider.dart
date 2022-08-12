@@ -10,31 +10,43 @@ import '/providers/input_provider.dart';
 import '/providers/source_provider.dart';
 import '/providers/target_provider.dart';
 
-final FutureProvider<Translation?> outputProvider =
-    FutureProvider<Translation?>((FutureProviderRef<Translation?> ref) async {
-  final String query = ref.watch(inputProvider);
-  if (query.isEmpty) {
-    return null;
+final StateNotifierProvider<OutputNotifier, Translation?> outputProvider =
+    StateNotifierProvider<OutputNotifier, Translation?>(
+  (Ref ref) => OutputNotifier(ref),
+  name: 'OutputProvider',
+);
+
+class OutputNotifier extends StateNotifier<Translation?> {
+  OutputNotifier(this.ref) : super(null) {
+    _initializeOutput();
   }
-  final String sourceKey = ref.watch(sourceProvider);
-  final String targetKey = ref.watch(targetProvider);
 
-  Translation? translation;
+  final Ref ref;
 
-  try {
-    final http.Response response = await http.get(
-      Uri.https('lingva.ml', '/api/v1/$sourceKey/$targetKey/$query'),
-    );
+  Future<void> _initializeOutput() async {
+    final String query = ref.watch(inputProvider);
+    state = query.isEmpty ? null : await _fetch(query);
+  }
 
-    translation = Translation.fromJson(
-      json: json.decode(response.body) as Map<String, dynamic>,
-    );
+  Future<Translation?> _fetch(String query) async {
+    Translation? translation;
+    final String sourceKey = ref.watch(sourceProvider);
+    final String targetKey = ref.watch(targetProvider);
+    try {
+      final http.Response response = await http.get(
+        Uri.https('lingva.ml', '/api/v1/$sourceKey/$targetKey/$query'),
+      );
 
-    if (translation.translation != null) {
-      HistoryDB.instance.add(query, translation.translation!);
+      translation = Translation.fromJson(
+        json: json.decode(response.body) as Map<String, dynamic>,
+      );
+
+      if (translation.translation != null) {
+        HistoryDB.instance.add(query, translation.translation!);
+      }
+    } catch (e) {
+      debugPrint(e.toString());
     }
-  } catch (e) {
-    debugPrint(e.toString());
+    return translation;
   }
-  return translation;
-});
+}

@@ -5,7 +5,8 @@ import '/utils/storage.dart';
 
 final StateNotifierProvider<ThemeNotifier, Brightness?> themeProvider =
     StateNotifierProvider<ThemeNotifier, Brightness?>(
-  (StateNotifierProviderRef<ThemeNotifier, Brightness?> ref) => ThemeNotifier(),
+  (Ref ref) => ThemeNotifier(),
+  name: 'ThemeProvider',
 );
 
 class ThemeNotifier extends StateNotifier<Brightness?> {
