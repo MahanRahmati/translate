@@ -1,8 +1,16 @@
+import 'dart:convert';
+
 class Translation {
   Translation({
     required this.translation,
     required this.pronunciation,
   });
+
+  factory Translation.fromRawJson(String str) {
+    return Translation.fromJson(
+      json: json.decode(str) as Map<String, dynamic>,
+    );
+  }
 
   factory Translation.fromJson({required Map<String, dynamic> json}) {
     Map<String, dynamic>? info;
