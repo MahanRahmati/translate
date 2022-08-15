@@ -40,7 +40,6 @@ class OutputNotifier extends StateNotifier<AsyncValue<Translation?>> {
     if (translation.translation != null) {
       HistoryDB.instance.add(query, translation.translation!);
     }
-
     return translation;
   }
 }
