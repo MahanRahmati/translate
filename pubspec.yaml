@@ -3,7 +3,7 @@ description: Alternative front-end for Google Translate, serving as a Free and O
 
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
-version: 2.0.5
+version: 2.1.0
 
 environment:
   sdk: ">=2.17.1 <3.0.0"
