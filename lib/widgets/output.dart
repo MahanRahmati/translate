@@ -32,21 +32,26 @@ class OutputWidget extends ConsumerWidget {
                 );
               },
               data: (Translation? t) {
-                return Padding(
-                  padding: Styles.normal,
-                  child: t != null
-                      ? ArnaSelectableText(
-                          t.translation!,
-                          style: ArnaTheme.of(context).textTheme.body,
-                        )
-                      : Text(
-                          context.localizations.translation,
-                          style: ArnaTheme.of(context).textTheme.body!.copyWith(
-                                color: ArnaColors.secondaryTextColor
-                                    .resolveFrom(context),
+                return translation.isLoading
+                    ? const Center(child: ArnaProgressIndicator())
+                    : Padding(
+                        padding: Styles.normal,
+                        child: t != null
+                            ? ArnaSelectableText(
+                                t.translation!,
+                                style: ArnaTheme.of(context).textTheme.body,
+                              )
+                            : Text(
+                                context.localizations.translation,
+                                style: ArnaTheme.of(context)
+                                    .textTheme
+                                    .body!
+                                    .copyWith(
+                                      color: ArnaColors.secondaryTextColor
+                                          .resolveFrom(context),
+                                    ),
                               ),
-                        ),
-                );
+                      );
               },
             ),
           ),
