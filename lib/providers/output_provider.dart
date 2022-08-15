@@ -15,7 +15,7 @@ final StateNotifierProvider<OutputNotifier, AsyncValue<Translation?>>
 );
 
 class OutputNotifier extends StateNotifier<AsyncValue<Translation?>> {
-  OutputNotifier(this.ref) : super(const AsyncValue<Translation?>.loading()) {
+  OutputNotifier(this.ref) : super(const AsyncValue<Translation?>.data(null)) {
     _initializeOutput();
   }
 
@@ -23,14 +23,13 @@ class OutputNotifier extends StateNotifier<AsyncValue<Translation?>> {
 
   Future<void> _initializeOutput() async {
     final String query = ref.watch(inputProvider);
-    state = const AsyncValue<Translation?>.loading();
-    state = await AsyncValue.guard(() => _fetch(query));
+    if (query.isNotEmpty) {
+      state = const AsyncValue<Translation?>.loading();
+      state = await AsyncValue.guard(() => _fetch(query));
+    }
   }
 
   Future<Translation?> _fetch(String query) async {
-    if (query.isEmpty) {
-      return null;
-    }
     Translation? translation;
     final String sourceKey = ref.watch(sourceProvider);
     final String targetKey = ref.watch(targetProvider);
