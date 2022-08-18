@@ -9,7 +9,6 @@ import '/providers/target_provider.dart';
 import '/screens/settings.dart';
 import '/strings.dart';
 import '/utils/storage.dart';
-import '/utils/system_overlay.dart';
 import '/widgets/controllers_buttons.dart';
 import '/widgets/history_list.dart';
 import '/widgets/input.dart';
@@ -114,7 +113,7 @@ class _HomeState extends ConsumerState<Home> {
 
   @override
   Widget build(BuildContext context) {
-    updateSystemUIOverlayStyle(context);
+    ArnaHelpers.setNavigationBarStyle(context);
     final bool isExpanded = ArnaHelpers.isExpanded(context);
 
     const Widget input = InputWidget();
