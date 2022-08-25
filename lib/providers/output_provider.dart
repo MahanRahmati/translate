@@ -4,8 +4,10 @@ import 'package:http/http.dart' as http;
 import '/db/history_db.dart';
 import '/models/translation.dart';
 import '/providers/input_provider.dart';
+import '/providers/instance_provider.dart';
 import '/providers/source_provider.dart';
 import '/providers/target_provider.dart';
+import '/providers/use_instance_provider.dart';
 
 final StateNotifierProvider<OutputNotifier, AsyncValue<Translation?>>
     outputProvider =
@@ -33,8 +35,11 @@ class OutputNotifier extends StateNotifier<AsyncValue<Translation?>> {
     Translation? translation;
     final String sourceKey = ref.watch(sourceProvider);
     final String targetKey = ref.watch(targetProvider);
+    final bool useInstance = ref.watch(useInstanceProvider);
+    final String instance =
+        useInstance ? ref.watch(instanceProvider) ?? 'lingva.ml' : 'lingva.ml';
     final http.Response response = await http.get(
-      Uri.https('lingva.ml', '/api/v1/$sourceKey/$targetKey/$query'),
+      Uri.https(instance, '/api/v1/$sourceKey/$targetKey/$query'),
     );
     translation = Translation.fromRawJson(response.body);
     if (translation.translation != null) {

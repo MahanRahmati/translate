@@ -99,17 +99,15 @@ class _LanguagesState extends ConsumerState<Languages> {
         ),
         const ArnaDivider(),
         Expanded(
-          child: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                ArnaList(
-                  title: context.localizations.languages,
-                  showDividers: true,
-                  showBackground: true,
-                  children: list,
-                ),
-              ],
-            ),
+          child: ListView(
+            children: <Widget>[
+              ArnaList(
+                title: context.localizations.languages,
+                showDividers: true,
+                showBackground: true,
+                children: list,
+              ),
+            ],
           ),
         ),
       ],

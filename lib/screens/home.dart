@@ -148,36 +148,26 @@ class _HomeState extends ConsumerState<Home> {
       title: Strings.appName,
       headerBarMiddle: isExpanded ? const ControllersButtons(top: true) : null,
       actions: <Widget>[
-        ArnaPopupMenuButton<int>(
-          itemBuilder: (BuildContext context) => <ArnaPopupMenuEntry<int>>[
-            ArnaPopupMenuItem<int>(
+        ArnaPopupMenuButton(
+          itemBuilder: (BuildContext context) => <ArnaPopupMenuEntry>[
+            ArnaPopupMenuItem(
               enabled: historyDB.isNotEmpty,
-              value: 0,
-              child: Text(context.localizations.history),
+              leading: const Icon(Icons.history_outlined),
+              title: context.localizations.history,
+              onTap: onHistoryPressed,
             ),
             const ArnaPopupMenuDivider(),
-            ArnaPopupMenuItem<int>(
-              value: 1,
-              child: Text(context.localizations.settings),
+            ArnaPopupMenuItem(
+              leading: const Icon(Icons.settings_outlined),
+              title: context.localizations.settings,
+              onTap: onSettingsPressed,
             ),
-            ArnaPopupMenuItem<int>(
-              value: 2,
-              child: Text(context.localizations.about),
+            ArnaPopupMenuItem(
+              leading: const Icon(Icons.info_outlined),
+              title: context.localizations.about,
+              onTap: onAboutPressed,
             ),
           ],
-          onSelected: (int index) {
-            switch (index) {
-              case 0:
-                onHistoryPressed();
-                break;
-              case 1:
-                onSettingsPressed();
-                break;
-              case 2:
-                onAboutPressed();
-                break;
-            }
-          },
         ),
       ],
       headerBarBottom: isExpanded ? null : const ControllersButtons(top: false),
