@@ -35,7 +35,7 @@ class OutputNotifier extends StateNotifier<AsyncValue<Translation?>> {
     final String sourceKey = ref.watch(sourceProvider);
     final String targetKey = ref.watch(targetProvider);
     final String instance = ref.watch(instanceProvider);
-    final String host = instance == '' ? 'lingva.ml' : instance;
+    final String host = instance.isEmpty ? 'lingva.ml' : instance;
     final http.Response response = await http.get(
       Uri.https(host, '/api/v1/$sourceKey/$targetKey/$query'),
     );
