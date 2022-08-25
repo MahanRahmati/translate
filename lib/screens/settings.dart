@@ -3,17 +3,31 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '/providers/instance_provider.dart';
 import '/providers/theme_provider.dart';
-import '/providers/use_instance_provider.dart';
 import '/strings.dart';
 
-class Settings extends ConsumerWidget {
+class Settings extends ConsumerStatefulWidget {
   const Settings({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() => _SettingsState();
+}
+
+class _SettingsState extends ConsumerState<Settings> {
+  final TextEditingController textController = TextEditingController();
+  bool editing = false;
+
+  @override
+  void dispose() {
+    textController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final Brightness? themeMode = ref.watch(themeProvider);
-    final bool useInstance = ref.watch(useInstanceProvider);
-    final String? instance = ref.watch(instanceProvider);
+    final String instance = ref.watch(instanceProvider);
+    final bool useInstance = instance == 'lingva.ml';
+    textController.text = useInstance ? '' : instance;
     return ListView(
       children: <Widget>[
         ArnaList(
@@ -53,23 +67,48 @@ class Settings extends ConsumerWidget {
           showBackground: true,
           children: <Widget>[
             ArnaSwitchListTile(
-              value: useInstance,
+              value: !useInstance,
               onChanged: (bool use) {
-                ref.read(useInstanceProvider.notifier).useInstance(
-                      useInstance: use,
-                    );
+                if (use) {
+                  ref.read(instanceProvider.notifier).setInstance('');
+                } else {
+                  ref.read(instanceProvider.notifier).setInstance('lingva.ml');
+                }
               },
               title: context.localizations.customInstance,
             ),
             AnimatedContainer(
-              height: useInstance ? Styles.base * 7 : 0,
+              height: !useInstance ? Styles.base * 7 : 0,
               duration: Styles.basicDuration,
               curve: Styles.basicCurve,
-              child: ArnaTextField(
-                controller: TextEditingController(
-                  text: useInstance ? instance : null,
-                ),
-                onChanged: ref.read(instanceProvider.notifier).setInstance,
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: ArnaTextField(
+                      controller: textController,
+                      //onChanged: ref.read(instanceProvider.notifier).setInstance,
+                    ),
+                  ),
+                  if (!editing)
+                    ArnaIconButton(
+                      icon: Icons.check_outlined,
+                      onPressed: () async {
+                        setState(() {
+                          editing = !editing;
+                        });
+                        if (editing) {
+                          await ref
+                              .read(instanceProvider.notifier)
+                              .checkInstance(textController.text);
+                          setState(() {
+                            editing = !editing;
+                          });
+                        }
+                      },
+                      tooltipMessage: 'Check URL',
+                    ),
+                  if (editing) const ArnaProgressIndicator(),
+                ],
               ),
             ),
           ],
