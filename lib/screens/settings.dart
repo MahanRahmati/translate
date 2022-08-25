@@ -86,7 +86,6 @@ class _SettingsState extends ConsumerState<Settings> {
                   Expanded(
                     child: ArnaTextField(
                       controller: textController,
-                      //onChanged: ref.read(instanceProvider.notifier).setInstance,
                     ),
                   ),
                   if (!editing)

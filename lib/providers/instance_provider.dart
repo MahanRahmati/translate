@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
+import '/models/translation.dart';
 import '/utils/storage.dart';
-import '../models/translation.dart';
 
 final StateNotifierProvider<InstanceNotifier, String> instanceProvider =
     StateNotifierProvider<InstanceNotifier, String>(
@@ -42,8 +42,6 @@ class InstanceNotifier extends StateNotifier<String> {
     } catch (e) {
       return false;
     }
-
-    //return response.statusCode == 200;
   }
 
   Future<bool> checkInstance(String url) async {
