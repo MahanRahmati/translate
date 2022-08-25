@@ -15,6 +15,7 @@ class Settings extends ConsumerStatefulWidget {
 class _SettingsState extends ConsumerState<Settings> {
   final TextEditingController textController = TextEditingController();
   bool editing = false;
+  bool hasError = false;
 
   @override
   void dispose() {
@@ -26,8 +27,7 @@ class _SettingsState extends ConsumerState<Settings> {
   Widget build(BuildContext context) {
     final Brightness? themeMode = ref.watch(themeProvider);
     final String instance = ref.watch(instanceProvider);
-    final bool useInstance = instance == 'lingva.ml';
-    textController.text = useInstance ? '' : instance;
+    final bool useInstance = instance != 'lingva.ml';
     return ListView(
       children: <Widget>[
         ArnaList(
@@ -67,8 +67,9 @@ class _SettingsState extends ConsumerState<Settings> {
           showBackground: true,
           children: <Widget>[
             ArnaSwitchListTile(
-              value: !useInstance,
+              value: useInstance,
               onChanged: (bool use) {
+                textController.text = useInstance ? instance : '';
                 if (use) {
                   ref.read(instanceProvider.notifier).setInstance('');
                 } else {
@@ -78,7 +79,7 @@ class _SettingsState extends ConsumerState<Settings> {
               title: context.localizations.customInstance,
             ),
             AnimatedContainer(
-              height: !useInstance ? Styles.base * 7 : 0,
+              height: useInstance ? Styles.base * 7 : 0,
               duration: Styles.basicDuration,
               curve: Styles.basicCurve,
               child: Row(
@@ -96,7 +97,7 @@ class _SettingsState extends ConsumerState<Settings> {
                           editing = !editing;
                         });
                         if (editing) {
-                          await ref
+                          hasError = !await ref
                               .read(instanceProvider.notifier)
                               .checkInstance(textController.text);
                           setState(() {

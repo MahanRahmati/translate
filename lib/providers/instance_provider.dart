@@ -48,7 +48,7 @@ class InstanceNotifier extends StateNotifier<String> {
     if (await test(url)) {
       setInstance(url);
       return true;
-    } else {}
+    }
     return false;
   }
 }
