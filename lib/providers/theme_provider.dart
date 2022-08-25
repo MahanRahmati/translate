@@ -14,8 +14,9 @@ class ThemeNotifier extends StateNotifier<Brightness?> {
     _initializeTheme();
   }
 
+  final SharedStorage storage = SharedStorage.instance;
+
   void _initializeTheme() {
-    final SharedStorage storage = SharedStorage.instance;
     final String? theme = storage.theme;
     switch (theme) {
       case 'dark':
@@ -31,7 +32,6 @@ class ThemeNotifier extends StateNotifier<Brightness?> {
   }
 
   void setTheme(Brightness? brightness) {
-    final SharedStorage storage = SharedStorage.instance;
     switch (brightness) {
       case Brightness.dark:
         storage.setTheme('dark');

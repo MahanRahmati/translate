@@ -19,4 +19,15 @@ class SharedStorage {
 
   String? get target => _storage.getString('target');
   void setTarget(final String target) => _storage.setString('target', target);
+
+  bool get useInstance => _storage.getBool('useInstance') ?? false;
+  void setUseInstance({final bool useInstance = false}) {
+    _storage.setBool('useInstance', useInstance);
+  }
+
+  String? get instanceUrl => _storage.getString('instanceUrl');
+  void setInstanceUrl(final String instanceUrl) => _storage.setString(
+        'instanceUrl',
+        instanceUrl,
+      );
 }
