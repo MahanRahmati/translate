@@ -13,9 +13,7 @@ class InputWidget extends ConsumerWidget {
       padding: Styles.small,
       child: ArnaTextField(
         controller: TextEditingController(text: ref.read(inputProvider)),
-        onChanged: (String text) {
-          ref.read(inputProvider.notifier).updateInput(text);
-        },
+        onChanged: ref.read(inputProvider.notifier).updateInput,
         clearButtonMode: ArnaOverlayVisibilityMode.editing,
         hintText: context.localizations.text,
         maxLength: 5000,

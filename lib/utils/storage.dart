@@ -26,8 +26,7 @@ class SharedStorage {
   }
 
   String? get instanceUrl => _storage.getString('instanceUrl');
-  void setInstanceUrl(final String instanceUrl) => _storage.setString(
-        'instanceUrl',
-        instanceUrl,
-      );
+  void setInstanceUrl(final String instanceUrl) {
+    _storage.setString('instanceUrl', instanceUrl);
+  }
 }
