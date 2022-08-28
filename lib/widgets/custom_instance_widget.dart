@@ -58,16 +58,12 @@ class _InstanceState extends ConsumerState<CustomInstanceWidget> {
                 ArnaIconButton(
                   icon: Icons.check_outlined,
                   onPressed: () async {
-                    setState(() {
-                      editing = !editing;
-                    });
+                    setState(() => editing = !editing);
                     if (editing) {
                       hasError = !await ref
                           .read(instanceProvider.notifier)
                           .checkInstance(textController.text);
-                      setState(() {
-                        editing = !editing;
-                      });
+                      setState(() => editing = !editing);
                     }
                   },
                   tooltipMessage: 'Check URL',
