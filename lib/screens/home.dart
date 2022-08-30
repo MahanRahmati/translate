@@ -43,8 +43,9 @@ class _HomeState extends ConsumerState<Home> {
     showArnaPopupDialog(
       context: context,
       title: context.localizations.history,
-      actions: <Widget>[
-        ArnaIconButton(
+      actions: <ArnaHeaderBarItem>[
+        ArnaHeaderBarButton(
+          label: context.localizations.deleteAll,
           icon: Icons.delete_outlined,
           onPressed: () => showArnaDialog<bool>(
             context: context,
@@ -57,12 +58,12 @@ class _HomeState extends ConsumerState<Home> {
                   textAlign: TextAlign.center,
                 ),
                 actions: <Widget>[
-                  ArnaTextButton(
+                  ArnaButton.text(
                     label: context.localizations.clear,
                     onPressed: () => Navigator.pop(context, true),
                     buttonType: ButtonType.destructive,
                   ),
-                  ArnaTextButton(
+                  ArnaButton.text(
                     label: context.localizations.cancel,
                     onPressed: () => Navigator.pop(context),
                   ),
@@ -77,7 +78,6 @@ class _HomeState extends ConsumerState<Home> {
               }
             }
           }),
-          tooltipMessage: context.localizations.deleteAll,
         ),
       ],
       builder: (BuildContext context) => const HistoryList(),
@@ -134,6 +134,7 @@ class _HomeState extends ConsumerState<Home> {
 
     final Widget compact = Column(
       children: const <Widget>[
+        ControllersButtons(top: false),
         Expanded(child: input),
         Expanded(
           child: SafeArea(
@@ -145,32 +146,28 @@ class _HomeState extends ConsumerState<Home> {
     );
 
     return ArnaScaffold(
-      title: Strings.appName,
-      headerBarMiddle: isExpanded ? const ControllersButtons(top: true) : null,
-      actions: <Widget>[
-        ArnaPopupMenuButton(
-          itemBuilder: (BuildContext context) => <ArnaPopupMenuEntry>[
-            ArnaPopupMenuItem(
-              enabled: historyDB.isNotEmpty,
-              leading: const Icon(Icons.history_outlined),
-              title: context.localizations.history,
-              onTap: onHistoryPressed,
-            ),
-            const ArnaPopupMenuDivider(),
-            ArnaPopupMenuItem(
-              leading: const Icon(Icons.settings_outlined),
-              title: context.localizations.settings,
-              onTap: onSettingsPressed,
-            ),
-            ArnaPopupMenuItem(
-              leading: const Icon(Icons.info_outlined),
-              title: context.localizations.about,
-              onTap: onAboutPressed,
-            ),
-          ],
-        ),
-      ],
-      headerBarBottom: isExpanded ? null : const ControllersButtons(top: false),
+      headerBar: ArnaHeaderBar(
+        leading: isExpanded ? const ControllersButtons(top: true) : null,
+        title: Strings.appName,
+        actions: <ArnaHeaderBarItem>[
+          ArnaHeaderBarButton(
+            label: context.localizations.history,
+            icon: Icons.history_outlined,
+            onPressed: onHistoryPressed,
+          ),
+          const ArnaHeaderBarDivider(),
+          ArnaHeaderBarButton(
+            label: context.localizations.settings,
+            icon: Icons.settings_outlined,
+            onPressed: onSettingsPressed,
+          ),
+          ArnaHeaderBarButton(
+            label: context.localizations.about,
+            icon: Icons.info_outlined,
+            onPressed: onAboutPressed,
+          ),
+        ],
+      ),
       body: ArnaBody(
         expanded: expanded,
         compact: compact,

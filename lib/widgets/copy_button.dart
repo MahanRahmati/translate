@@ -12,7 +12,7 @@ class CopyButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ArnaIconButton(
+    return ArnaButton.icon(
       icon: Icons.copy_outlined,
       onPressed: translation != null && translation!.isNotEmpty
           ? () {

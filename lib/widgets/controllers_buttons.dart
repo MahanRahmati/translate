@@ -68,30 +68,34 @@ class ControllersButtons extends ConsumerWidget {
               ),
             ],
           )
-        : Row(
-            children: <Widget>[
-              Expanded(
-                child: ArnaTextButton(
-                  label: source,
-                  onPressed: () => onSourcePressed(context),
-                  buttonSize: ButtonSize.huge,
+        : Padding(
+            padding: Styles.smallHorizontal,
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: ArnaButton.text(
+                    label: source,
+                    onPressed: () => onSourcePressed(context),
+                    buttonSize: ButtonSize.huge,
+                  ),
                 ),
-              ),
-              ArnaBorderlessButton(
-                icon: Icons.compare_arrows_outlined,
-                onPressed: sourceKey != 'auto'
-                    ? () => onSwapPressed(sourceKey, targetKey, ref)
-                    : null,
-                tooltipMessage: context.localizations.swap,
-              ),
-              Expanded(
-                child: ArnaTextButton(
-                  label: target,
-                  onPressed: () => onTargetPressed(context),
-                  buttonSize: ButtonSize.huge,
+                ArnaButton(
+                  icon: Icons.compare_arrows_outlined,
+                  onPressed: sourceKey != 'auto'
+                      ? () => onSwapPressed(sourceKey, targetKey, ref)
+                      : null,
+                  tooltipMessage: context.localizations.swap,
+                  buttonType: ButtonType.borderless,
                 ),
-              ),
-            ],
+                Expanded(
+                  child: ArnaButton.text(
+                    label: target,
+                    onPressed: () => onTargetPressed(context),
+                    buttonSize: ButtonSize.huge,
+                  ),
+                ),
+              ],
+            ),
           );
   }
 }
