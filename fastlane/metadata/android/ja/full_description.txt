@@ -1,0 +1,3 @@
+<i>Arna Translate</i> は、100以上の言語を翻訳できる、Google翻訳 の代替フロントエンドで、フリーでオープンソースです。
+
+<i>Arna Translate</i>はLingva TranslateのAPIを使用します。Lingvaは、NewPipe、Nitter、Invidious、Bibliogramなどのプロジェクトに着想を得た Google翻訳 の代替フロントエンドで、Google翻訳 からスクレイピングします。Google関連のサービスを一切使用せずに翻訳を取得するため、トラッキングを防止できます。Lingva Translateの詳細については、<a href='https://github.com/thedaviddelta/lingva-translate' target='_blank' rel='nofollow'>こちら</a>をご覧ください。.
