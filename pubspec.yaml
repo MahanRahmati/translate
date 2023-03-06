@@ -16,7 +16,7 @@ dependencies:
   arna:
     git: https://github.com/MahanRahmati/Arna.git
     version: ^1.0.6
-  flutter_riverpod: ^2.2.0
+  flutter_riverpod: ^2.3.0
   http: ^0.13.5
   shared_preferences: ^2.0.18
   hive: ^2.2.3
