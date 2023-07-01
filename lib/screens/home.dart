@@ -132,8 +132,8 @@ class _HomeState extends ConsumerState<Home> {
       ],
     );
 
-    final Widget compact = Column(
-      children: const <Widget>[
+    const Widget compact = Column(
+      children: <Widget>[
         ControllersButtons(top: false),
         Expanded(child: input),
         Expanded(
