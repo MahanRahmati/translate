@@ -169,8 +169,8 @@ class _HomeState extends ConsumerState<Home> {
         ],
       ),
       body: ArnaBody(
-        expanded: expanded,
-        compact: compact,
+        largeBody: (_) => expanded,
+        smallBody: (_) => compact,
       ),
     );
   }
